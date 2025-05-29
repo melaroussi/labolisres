@@ -1,0 +1,40 @@
+
+.titreBleu	{background-color : #0E5889;color : white;text-align : center; font-weight : bold;font-size: 11px;font-family: Verdana, sans-serif;}
+.titre		{background-color : #4D8A9F;color : white;text-align : left; font-weight : normal;font-size: 11px;font-family: Verdana, sans-serif;}
+.sousTitre		{background-color : #B8D0D9;color : white;text-align : left; font-weight : normal;font-size: 11px;font-family: Verdana, sans-serif;}
+.sousTitrePC	{background-color : #B8D0D9;color : #0E5889;text-align : left; font-weight : normal;font-size: 11px;font-family: Verdana, sans-serif;}
+.corps		   {background-color : #E6EEF0;color:black;	text-align : left; font-weight : normal;font-size: 11px;font-family: Verdana, sans-serif;}
+.corpsFonce	   {background-color : #CBE8EF;color:black;text-align : left; font-weight : normal;font-size: 11px;font-family: Verdana, sans-serif;}
+.descr	   {color : #404040;text-align : left; font-weight : normal;font-size: 9px;font-family: Verdana, sans-serif;}
+.descrFonce	   {color : #000000; font-weight : normal;font-size: 9px;font-family: Verdana, sans-serif;}
+.descrFonce:hover	   {color : #6F75AF; font-weight : normal;font-size: 9px;font-family: Verdana, sans-serif;}
+
+.tab-on {font-weight:bold;font-size: 14px;text-align : center;BORDER: #000000 1px solid; PADDING: 2px; BORDER-BOTTOM:0px; CURSOR: pointer; COLOR: #000000; PADDING-TOP: 2px;}
+.tab-off {text-align : center;BORDER-RIGHT: #cccccc 1px; PADDING-RIGHT: 2px; BORDER-TOP: #cccccc 1px solid; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; BORDER-LEFT: #cccccc 1px solid; CURSOR: pointer; COLOR: #666666; PADDING-TOP: 2px; BORDER-BOTTOM: #000000 1px solid; }
+.tab-none {	BORDER-RIGHT: #cccccc 1px; PADDING-RIGHT: 2px; BORDER-TOP: 1px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; BORDER-LEFT: #cccccc 1px solid; PADDING-TOP: 2px; BORDER-BOTTOM: #000000 1px solid}
+.tab-core {	BORDER: #000000 1px solid;BORDER-TOP:0px;}
+.tab-content { PADDING-RIGHT: 5px;  PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; VERTICAL-ALIGN: top; PADDING-TOP: 5px; }
+
+.hide {DISPLAY: none}
+.show {DISPLAY: block}
+table.show {DISPLAY: table}
+.pointer {cursor: pointer}
+.hand {cursor: pointer}
+.defaultCursor {cursor: default}
+
+.rouge {color:black;font-size: 11px;background-color : #FFCCCC;}
+.gras {font-weight: bold;}
+.italique {font-style: italic;}
+.souligne {text-decoration: underline;}
+
+.titreChapitre {font-size: 14px;text-align : left;font-family: Verdana, sans-serif;color: white; padding-left: 5px;}
+.commentaireChapitre {font-size: 9px;text-align : left;font-family: Verdana, sans-serif;color: white;}
+.titreAnalyse {font-size: 12px;text-align : left;font-family: Verdana, sans-serif;color: black;background-color:#ACCAFF;}
+.commentaireAnalyse {font-size: 9px;text-align : left;font-family: Verdana, sans-serif;color: black;background-color:#CEECFF;}
+
+.champPrescription {font-size:11px;}
+.obligatoire{font-weight:bold;}
+.symbole{width:25px;display:inline-block;}
+#prescription {text-align:center;}
+#prescription fieldset{display:block;width:670px;margin:auto;padding:5px;text-align:justify;border:1px solid lightgrey;font-size: 9px;}
+#prescription legend{margin-bottom:5px;}
