@@ -1,4 +1,4 @@
-<?                                  
+<?php                                  
  /**                                
   * Librairie de modification des dates                     
   *                                 
@@ -190,7 +190,7 @@ function numToJour($nbr,$options = "all")
 
 
  /**                                  
-  * numToJourAbrege : Affichage du nom du jour abrégé
+  * numToJourAbrege : Affichage du nom du jour abrÃ©gÃ©
   * ...                              
   *                                   
   *                                   
@@ -230,22 +230,22 @@ function numToJourAbrege($nbr,$options = "all")
 function numToMoisSsClass($nbr,$options = "all")
 {
 	if ($nbr==1) $res=_s("Janvier",$options);
-	if ($nbr==2) $res=_s("Février",$options);
+	if ($nbr==2) $res=_s("FÃ©vrier",$options);
 	if ($nbr==3) $res=_s("Mars",$options);
 	if ($nbr==4) $res=_s("Avril",$options);
 	if ($nbr==5) $res=_s("Mai",$options);
 	if ($nbr==6) $res=_s("Juin",$options);
 	if ($nbr==7) $res=_s("Juillet",$options);
-	if ($nbr==8) $res=_s("Août",$options);
+	if ($nbr==8) $res=_s("AoÃ»t",$options);
 	if ($nbr==9) $res=_s("Septembre",$options);
 	if ($nbr==10) $res=_s("Octobre",$options);
 	if ($nbr==11) $res=_s("Novembre",$options);
-	if ($nbr==12) $res=_s("Décembre",$options);
+	if ($nbr==12) $res=_s("DÃ©cembre",$options);
 	return $res;
 }
 
  /**                                  
-  * numToMoisAbrege : Affichage des noms abrégés des mois 
+  * numToMoisAbrege : Affichage des noms abrÃ©gÃ©s des mois 
   * ...                              
   *                                   
   *                                   
@@ -266,11 +266,11 @@ function numToMoisAbrege($nbr,$options = "all")
 	if ($nbr==5) $res=_s("Mai",$options);
 	if ($nbr==6) $res=_s("Juin",$options);
 	if ($nbr==7) $res=_s("Juil",$options);
-	if ($nbr==8) $res=_s("Août",$options);
+	if ($nbr==8) $res=_s("AoÃ»t",$options);
 	if ($nbr==9) $res=_s("Sept",$options);
 	if ($nbr==10) $res=_s("Oct",$options);
 	if ($nbr==11) $res=_s("Nov",$options);
-	if ($nbr==12) $res=_s("Déc",$options);
+	if ($nbr==12) $res=_s("DÃ©c",$options);
 	return $res;
 }
  
@@ -372,7 +372,7 @@ function listeMois($nom,$selected=""){
 }
 
  /**                                  
-  * listeAnnee : Menu pour les années (à partir de 2000)
+  * listeAnnee : Menu pour les annÃ©es (Ã  partir de 2000)
   *                                   
   *                                   
   * @param unknown $nom 
@@ -401,7 +401,7 @@ function listeAnnee($nom,$selected=""){
 
 
  /**                                  
-  * listeAnneeF : Menu pour les années (à partir de cette année)                              
+  * listeAnneeF : Menu pour les annÃ©es (Ã  partir de cette annÃ©e)                              
   *                                   
   *                                   
   * @param unknown $nom 
@@ -471,7 +471,7 @@ return $tt;
 }
 
  /**                                  
-  * numSemaineOnce : Retourne le numéro de semaine
+  * numSemaineOnce : Retourne le numÃ©ro de semaine
   *                                   
   *                                   
   * @param unknown $date 
@@ -490,7 +490,7 @@ function numSemaineOnce($date){
 }
 
  /**                                  
-  * numSemaineOnceTrace : Retourne le numéro de semaine pour les traces
+  * numSemaineOnceTrace : Retourne le numÃ©ro de semaine pour les traces
   *                                   
   *                                   
   * @param unknown $date 
@@ -564,7 +564,7 @@ function premierDernierJourSemaine($semaine,$annee) {
 }
 
  /**                                  
-  * numSemaine : Retourne le numéro de semaine                            
+  * numSemaine : Retourne le numÃ©ro de semaine                            
   *                                   
   *                                   
   * @param unknown $d 
@@ -596,7 +596,7 @@ function numSemaine($d,$m,$y)
 
 
  /**                                  
-  * dateExpire : Retourne si la date est expiré                             
+  * dateExpire : Retourne si la date est expirÃ©                             
   *                                   
   *                                   
   * @param unknown $jour 
@@ -610,7 +610,7 @@ function numSemaine($d,$m,$y)
   *                             
   **/                                 
 function dateExpire($jour,$mois,$annee){
- // Regarde si la date donnée en argument est anterieur a 3 ans
+ // Regarde si la date donnÃ©e en argument est anterieur a 3 ans
  if (checkdate($mois,$jour,$annee))
   {
    $atester=mktime(0,0,0,$mois,$jour,$annee);
@@ -675,7 +675,7 @@ var $mois;
 var $annee;
 
  /**                                  
-  * Date : Création d'une variable de type date                            
+  * Date : CrÃ©ation d'une variable de type date                            
   *                                   
   *                                   
   * @param     int $mois=0 
@@ -703,7 +703,7 @@ function __construct($mois=0,$annee=0){
         $now=mktime(0,0,0,$mois,$jour,$annee);
         $this->now=$now;
         $this->jour=$jour;
-        $this->moisString = array(_s("Janvier"),_s("Février"),_s("Mars"),_s("Avril"),_s("Mai"),_s("Juin"),_s("Juillet"),_s("Août"),_s("Septembre"),_s("Octobre"),_s("Novembre"),_s("Décembre"));
+        $this->moisString = array(_s("Janvier"),_s("FÃ©vrier"),_s("Mars"),_s("Avril"),_s("Mai"),_s("Juin"),_s("Juillet"),_s("AoÃ»t"),_s("Septembre"),_s("Octobre"),_s("Novembre"),_s("DÃ©cembre"));
         $this->annee=$annee;
         $this->mois=$this->format($mois);
 }
@@ -782,7 +782,7 @@ function suivant(){
 }
 
  /**                                  
-  * precedent : Donne la date précedente
+  * precedent : Donne la date prÃ©cedente
   *                                   
   *                                   
   *                                   
@@ -860,7 +860,7 @@ function mois($moisSeek){
 }
 
  /**                                  
-  * annee : Affectation d'une année
+  * annee : Affectation d'une annÃ©e
   *                                   
   *                                   
   * @param unknown $anneeSeek 
@@ -932,7 +932,7 @@ var $annee;
 var $present;
 
  /**                                  
-  * DateJour : Création d'une variable DateJour
+  * DateJour : CrÃ©ation d'une variable DateJour
   *                                   
   *                                   
   * @param  string $jour="" 
@@ -965,7 +965,7 @@ function __construct($jour="",$mois="",$annee=""){
 
 
  /**
-  * isGreaterOrEqualThan : Renvoie true si la date est plus grande que le paramêtre
+  * isGreaterOrEqualThan : Renvoie true si la date est plus grande que le paramÃªtre
   *
   *
   * @param DateJour $dateJour
@@ -986,7 +986,7 @@ function isGreaterOrEqualThan($dateJour) {
 }
 
  /**
-  * isLowerOrEqualThan : Renvoie true si la date est plus petite que le paramêtre
+  * isLowerOrEqualThan : Renvoie true si la date est plus petite que le paramÃªtre
   *
   *
   * @param DateJour $dateJour
@@ -1035,7 +1035,7 @@ function jourSeek($jour){
 }
 
  /**
-  * moisSeek : Décale la date de n mois
+  * moisSeek : DÃ©cale la date de n mois
   *
   *
   * @param unknown $mois
@@ -1064,7 +1064,7 @@ function moisSeek($mois){
 }
 
  /**                                  
-  * numSemaine : Retourne le numéro de semaine
+  * numSemaine : Retourne le numÃ©ro de semaine
   *                                   
   *                                   
   * @param unknown $sStr 
@@ -1198,7 +1198,7 @@ function mois($moisSeek){
 }
 
  /**                                  
-  * annee : Retourne l'année                             
+  * annee : Retourne l'annÃ©e                             
   *                                   
   *                                   
   * @param unknown $anneeSeek 
@@ -1278,7 +1278,7 @@ function dateAnterieure($date1,$date2) {
 }
 
  /**                                  
-  * differenceHoraire : Calcul la différence horaire
+  * differenceHoraire : Calcul la diffÃ©rence horaire
   *                                   
   *                                   
   * @param unknown $heure1 
@@ -1304,7 +1304,7 @@ function differenceHoraire($heure1,$heure2){
 }
 
  /**                                  
-  * differenceDate : Calcul la différence entre 2 dates
+  * differenceDate : Calcul la diffÃ©rence entre 2 dates
   *                                   
   *                                   
   * @param unknown $date1 

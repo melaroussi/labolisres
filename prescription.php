@@ -283,7 +283,7 @@ function completionForm(numIPP) {
 }
 
 </script>
-<?
+<?php
 $keyForm = uniqid(date("YmdHis"));
 $_SESSION["keyFormSession"] = $keyForm;
 
@@ -462,11 +462,11 @@ if(isset($_POST["dataPatient"])){
 							<?=_s("Demande urgente");?>
 						</label>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="data[urgent]" id="urgentOui" value="1" <?if($demandeUrgente==1) echo "checked=\"checked\""?>/>
+							<input class="form-check-input" type="radio" name="data[urgent]" id="urgentOui" value="1" <?php if($demandeUrgente==1) echo "checked=\"checked\""?>/>
 							<label class="form-check-label" for="urgentOui"><?=_s("Oui");?></label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="data[urgent]" id="urgentNon" value="0" <?if($demandeUrgente==0) echo "checked=\"checked\""?> />
+							<input class="form-check-input" type="radio" name="data[urgent]" id="urgentNon" value="0" <?php if($demandeUrgente==0) echo "checked=\"checked\""?> />
 							<label class="form-check-label" for="urgentNon"><?=_s("Non");?></label>
 						</div>
 					</div>
@@ -502,7 +502,7 @@ if(isset($_POST["dataPatient"])){
 						</label>
 						<select id="civilite" class="form-select" name="data[civilite]">
 							<option value="" selected="selected">(<?=_s("Sélectionnez");?>)</option>
-							<?
+							<?php
 								foreach($dataPrescription["tabCivilite"] as $civilite){
 									$selectedCiv = "";
 									if($civilite["civilite"] == $civilitePresc) $selectedCiv="selected=\"selected\"";
@@ -863,6 +863,6 @@ function changeCouleur(box, id) {
     }
 }
 </script>
-<?
+<?php
 afficheFoot();
 ?>

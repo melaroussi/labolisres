@@ -1,4 +1,4 @@
-<?
+<?php
 
 include_once ($conf["baseDir"]."include/lib.patient.inc.php");
 include_once ($conf["baseDir"]."include/lib.soap.inc.php");
@@ -117,7 +117,7 @@ function afficheFoot($options=Array()) {
 			</div>
 			<div class="hide" id="nsFooterClear"><!-- for NS4's sake --></div>
 			<div id="footer" class="gap">
-				KaliRes pour KaliSil - Copyright &copy; 2012  <a href="http://www.netika.net/" title="Netika">Netika</a>, tous droits réservés
+	<?php
 			</div>
 		</div>
 	</div>
@@ -186,7 +186,7 @@ function afficheMessageSil($message=false) {
 			});
 		}
 	</script>
-	<?
+	<?php
 
 	echo $patientLogged->message;
 	
@@ -251,7 +251,7 @@ function getStrPaiement($idDemande,$numDemande,$montant, $idSite=0, $affichage='
 		$montant2 = sprintf("%02d",$montant2);
 		
 		if ($type=='CBI') {
-			$tokenTmp = sha1("#|Jv".$idPatient."=+&£".$idDemande."*!W<".$numDemande."};Ku".$montant1."J?;s".$montant2."%kEn".$y."Er".$md."9*".$h."£ù".$is.".§Ft");
+			$tokenTmp = sha1("#|Jv".$idPatient."=+&Â£".$idDemande."*!W<".$numDemande."};Ku".$montant1."J?;s".$montant2."%kEn".$y."Er".$md."9*".$h."Â£Ã¹".$is.".Â§Ft");
 			$tokenCalcule = $montant2.substr($idDemandeFixe,6,6).substr($tokenTmp,30,6).$h.substr($tokenTmp,0,10).$y.substr($tokenTmp,10,5).$is.substr($tokenTmp,20,10).$md.substr($tokenTmp,15,5).$montant1.substr($idDemandeFixe,0,6);
 			$urlPaiement = str_replace(Array("[[token]]","[[idDemande]]","[[numDemande]]","[[email]]","[[montant]]"),Array(urlencode($tokenCalcule),urlencode($idDemande),urlencode($numDemande),urlencode($email),urlencode($montant)),$urlPaiement);
 			switch($affichage) {
@@ -266,7 +266,7 @@ function getStrPaiement($idDemande,$numDemande,$montant, $idSite=0, $affichage='
 		} else {
 			/*
 			* Attention :
-			*	pour le compte monetico, l'adresse responseURL est configurée dans le compte par monetico.
+			*	pour le compte monetico, l'adresse responseURL est configurÃ©e dans le compte par monetico.
 			*	Pour le compte test 2b6536860c1ef50677da elle est http://www.netika.net/monetico/Phase2Back.php
 			*/
 			$paiement = paiementEnLigneCtrl::get($type,$merchantId,$secretKey,$tpeNumber, getSrOption('testPaiement'));
@@ -383,7 +383,7 @@ function klRedir($page,$nbSecondes,$texte){
 		echo "function changeUrl(){document.location.href='"._secho($page,'ads')."';}\n";
 		echo "setTimeout(\"changeUrl()\",".$nbSecondes."000);\n";
 		echo "</SCRIPT>";
-		echo klMessage('info',$texte,sprintf(_s("Si cette page ne s'enlève pas dans %s secondes cliquer %s ici"),$nbSecondes,"<a href=\"$page\" onClick=\"changeUrl();return false;\">")."</a>","");
+		echo klMessage('info',$texte,sprintf(_s("Si cette page ne s'enlÃ¨ve pas dans %s secondes cliquer %s ici"),$nbSecondes,"<a href=\"$page\" onClick=\"changeUrl();return false;\">")."</a>","");
 	}
 
 }
@@ -677,21 +677,21 @@ function returnFunction($data) {
 function encodePassword($type,$pass) {
 	switch($type) {
 		case "patient":
-			return hash("sha256","£*gn°".substr($pass,0,3)."60.Pm".substr($pass,3)."Az*+");
+			return hash("sha256","Â£*gnÂ°".substr($pass,0,3)."60.Pm".substr($pass,3)."Az*+");
 			break;
 		case "demandeur":
 		case "medecin":
 		case "correspondant":
 		case "preleveur":
 		case "preleveurDom":
-			return hash("sha256","?.&P".substr($pass,0,1)."mm0HG".substr($pass,1)."è^ *");
+			return hash("sha256","?.&P".substr($pass,0,1)."mm0HG".substr($pass,1)."Ã¨^ *");
 			break;
 	}
 }
 
 function encodeUserToken($token,$niveau,$login,$password) {
 	if($token != "") {
-		$token = sha1("0(!".$token.";Jy".$niveau."l-à".$login."+B,".$password."oO=");
+		$token = sha1("0(!".$token.";Jy".$niveau."l-Ã ".$login."+B,".$password."oO=");
 	}
 	return $token;
 }
@@ -744,7 +744,7 @@ function getDemandeStatusStr($status){
 		case 'enCours': 
 		case 'complet': $str = "<font color=\"#ff6600\">"._s("En cours")."</font>"; break;
 		case 'valide': 
-		case 'valideValab': $str = "<font color=\"#009933\">"._s("Validée")."</font>"; break;
+		case 'valideValab': $str = "<font color=\"#009933\">"._s("ValidÃ©e")."</font>"; break;
 	}
 	return $str;
 }
@@ -752,7 +752,7 @@ function getDemandeStatusStr($status){
 function getPCStatusStr($status){
 	switch($status){
 		case 'saisie': $str = "<font color=\"#00349a\">"._s("Saisie")."</font>"; break;
-		case 'valide': $str = "<font color=\"#009933\">"._s("Validée")."</font>"; break;
+		case 'valide': $str = "<font color=\"#009933\">"._s("ValidÃ©e")."</font>"; break;
 	}
 	return $str;
 }
@@ -795,10 +795,10 @@ function entete($menu="",$menuSite=true) {
 					<div id="heading">
 						<div class="head"></div>
 						<div class="top">
-							<?include($conf['baseDir']."menuTop.php")?>
+							<?php include($conf['baseDir']."menuTop.php")?>
 						</div>
 						<div class="sub">
-							<?include($conf['baseDir']."menuTop2.php")?>
+							<?php include($conf['baseDir']."menuTop2.php")?>
 						</div>
 					</div>
 				</div>
@@ -810,7 +810,7 @@ function entete($menu="",$menuSite=true) {
 					<div id="mainInner">
 						<div class="left" style="padding-left: 1px">
 							<ul>								
-								<?
+								<?php
 									$hr = false;
 									
 									if (isset($patientLogged) && $patientLogged->isAuth()) {
@@ -826,11 +826,11 @@ function entete($menu="",$menuSite=true) {
 													 </li>";
 												}
 												if($_SESSION["refAnalyse"] > 0) {
-													echo "<li><a href='".$conf["baseURL"]."referentiel.php'><img border=0 width=16 src=\"images/icodico.gif\"> "._s("Référentiel d'analyses")."</a></li>";
-												}
+								<?php
+<?php
 											}										
 											echo "<li><a href='".$conf["baseURL"]."changePassword.php'><img border=0 src=\"images/option.gif\"> "._s("Options")."</a></li>";
-											echo "<li><a href='".$conf["baseURL"]."index.php?logout=1'><img border=0 src=\"images/logout16.gif\"> "._s("Déconnexion")."</a></li>";
+											echo "<li><a href='".$conf["baseURL"]."index.php?logout=1'><img border=0 src=\"images/logout16.gif\"> "._s("DÃ©connexion")."</a></li>";
 											$hr = true;
 										}
 									}
@@ -896,7 +896,7 @@ function formateTexteAccueil($txt) {
 		"[[siteMail]]"				=> getSrOption("laboMail"),
 		"[[lienPdf]]"				=> "<A href=\"http://www.adobe.com/fr/products/reader/\">Adobe Reader</A>",
 		"[[lien]]"					=> "<A style='color: #163477;text-decoration: none;' HREF='".getSrOption("kaliResURL")."'><B>".getSrOption("kaliResURL")."</B></A>",
-		"[[typeLogin]]"				=> ((getSrOption("loginPatient")=="numSecu")?("Numéro de sécurité sociale"):("Numéro patient")),
+		"[[typeLogin]]"				=> ((getSrOption("loginPatient")=="numSecu")?("NumÃ©ro de sÃ©curitÃ© sociale"):("NumÃ©ro patient")),
 		"[[dureePasswordPatient]]"	=> getSrOption("validPassPerso")
 	);
 	foreach($replace as $key => $val) {
@@ -1133,7 +1133,7 @@ function getMonnaie($type="sigle") {
 		else $monnaie["char"]=$conf["monnaieChar"];
 	}
 	else {
-		$monnaie["sigle"]="€";
+		$monnaie["sigle"]="Â€";
 		$monnaie["txt"]="euros";
 		$monnaie["html"]="&euro;";
 		$monnaie["char"]=chr(128);
@@ -1285,7 +1285,7 @@ function _mime_content_type($filename) {
 		finfo_close($finfo);
 	}
 
-	// 4. valeur par défaut
+	// 4. valeur par dÃ©faut
 	if($mimeType==false) $mimeType = 'application/octet-stream';
 
 	return $mimeType;

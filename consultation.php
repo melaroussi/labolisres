@@ -1,6 +1,6 @@
-<?                                  
+<?php                                  
  /**                                
-  * Page d'identification et de consultation des rÈsultats                     
+?><?php
   *                                 
   *        		                 
   * @package KaliLab                
@@ -34,7 +34,7 @@ function getStrDate($data) {
 	if($data["preleveHeure"]!="00:00:00" && $data["preleveDate"]!="0000-00-00") {
 		$dateReference = $data['preleveDate'];
 		$heureReference = substr($data["preleveHeure"],0,-3);
-		$strTooltip = sprintf(_s("Date de prÈlËvement : %s"),afficheDate($dateReference)." ".$heureReference);
+		$strTooltip = sprintf(_s("Date de pr√©l√®vement : %s"),afficheDate($dateReference)." ".$heureReference);
 	} else {
 		$dateReference = $data['saisieDate'];
 		$heureReference = substr($data['saisieHeure'],0,-3);
@@ -68,7 +68,7 @@ if ($patientLogged->niveau=="preleveur" || $patientLogged->niveau=="medecin" || 
 		.analysevalide { font-style: normal; color:#005020; }
 		.analysehorsborne { background-color: #F7BC8C; padding:2px; }
 	</style>
-	<?
+	<?php
 }
 
 if ($patientLogged->niveau=="patient") {
@@ -78,7 +78,7 @@ if ($patientLogged->niveau=="patient") {
 		if($patientLogged->numDemande != "") {
 			$sNumDoss = $patientLogged->numDemande;
 		} else {
-			afficheMessage(_s("Erreur de sÈlection : impossible de trouver la demande"));
+			afficheMessage(_s("Erreur de s√©lection : impossible de trouver la demande"));
 			afficheFoot();
 			die();
 		}
@@ -98,13 +98,13 @@ if ($patientLogged->niveau=="patient") {
 	
 	$uneDemandeRegler = false;
 	$strTable = "<table align=center cellpadding=1 cellspacing=1 border=0 width=600 style=\"border:1px solid #ccc;\">";
-	$strTable .= "<tr class=titreBleu><td colspan=2>"._s("NumÈro de demande")."</td><td>"._s("Date de la demande")."</td></tr>";
+	$strTable .= "<tr class=titreBleu><td colspan=2>"._s("Num√©ro de demande")."</td><td>"._s("Date de la demande")."</td></tr>";
     if (is_array($dataListe)) {
     	foreach ($dataListe as $key => $data) {
 			$idSite = isset($data["idSite"]) ? $data["idSite"] : 0;
 			if($data["restePatient"] > 0 && $afficheDossierPaye > 0 && $data["restePatient"] > $afficheDossierPayeMin){
 				$strPaiement = getStrPaiement($data['id'],$data['numDemande'],$data["restePatient"],$idSite,'reduit');
-				$bonusLienImg = _s("Demande ‡ rÈgler")." (".$data['restePatient']." ".getMonnaie("html").") ".$strPaiement;
+				$bonusLienImg = _s("Demande √† r√©gler")." (".$data['restePatient']." ".getMonnaie("html").") ".$strPaiement;
 				$bonusLienDmd = $data['numDemande'];
 				$uneDemandeRegler = true;
 			} else {
@@ -126,13 +126,13 @@ if ($patientLogged->niveau=="patient") {
 			."</tr>";
 		}
 	} else if ($affichAnt==0) {
-		$strTable .= "<TR><TD colspan=3>"._s("Aucune demande trouvÈe. Pensez ‡ saisir le numÈro de demande lors de l'identification !")."</TD></TR>";
+		$strTable .= "<TR><TD colspan=3>"._s("Aucune demande trouv√©e. Pensez √† saisir le num√©ro de demande lors de l'identification !")."</TD></TR>";
 	}
 	$strTable .= "</table>";
 	
-	echo "<H2>"._s("Cliquez sur votre numÈro de demande pour la consulter")."</h2>";
+	echo "<H2>"._s("Cliquez sur votre num√©ro de demande pour la consulter")."</h2>";
 	if($uneDemandeRegler && getSrOption('urlPaiement') != '') {
-		echo "<div style=\"padding-left:20px;\">".sprintf(_s("Pour rÈgler le reste ‡ payer sur votre demande, veuillez cliquer sur l'icÙne %s Vous pourrez ensuite accÈder ‡ vos rÈsultats."),"<img src=\"images/facture.gif\" border=\"0\"><br />")."</div><br />";
+		echo "<div style=\"padding-left:20px;\">".sprintf(_s("Pour r√©gler le reste √† payer sur votre demande, veuillez cliquer sur l'ic√¥ne %s Vous pourrez ensuite acc√©der √† vos r√©sultats."),"<img src=\"images/facture.gif\" border=\"0\"><br />")."</div><br />";
 	}
 	
 	echo $strTable;
@@ -168,14 +168,14 @@ elseif ($patientLogged->niveau=="preleveur") {
 		if (isset($_SESSION['filter'])){
 			$filter = $_SESSION['filter'];
 		}else{
-			/* Filtre par dÈfaut */
+			/* Filtre par d√©faut */
 			$filter = Array(
 				'nomPatient'=>'', 
 				'prenomPatient'=>'', 
 				'numDemande'=>'',
 				'nomNaissancePatient'=>'',
 				'dateNaissance'=>'',
-				'dateDebut'=>date('d-m-Y', time() - 2592000), // 1 mois avant afficher la date maximale que les prÈleveurs peuvent voir
+				'dateDebut'=>date('d-m-Y', time() - 2592000), // 1 mois avant afficher la date maximale que les pr√©leveurs peuvent voir
 				'dateFin'=>date('d-m-Y'),  
 				'sort' => '',
 				'orderIntervenant' => ''
@@ -198,7 +198,7 @@ elseif ($patientLogged->niveau=="preleveur") {
 		if($patientLogged->isAuth()) {
 			$patientLogged->logout();
 		}
-		klRedir("denied.php?type=".$_SESSION["loginError"],1,"<span style=\"color:red;\">"._s("L'authentification a ÈchouÈ")."</span>");
+		klRedir("denied.php?type=".$_SESSION["loginError"],1,"<span style=\"color:red;\">"._s("L'authentification a √©chou√©")."</span>");
 		afficheFoot();
 		die();
 	}
@@ -227,9 +227,9 @@ elseif ($patientLogged->niveau=="preleveur") {
 		<tr class=corps>
 			<td class="corpsFonce" align="right"><?=_s("Nom usuel");?></td>
 			<td><INPUT size="14" style="font-size:11px;" TYPE="text" NAME="filter[nomPatient]" value="<?=$filter['nomPatient']?>" /></td>
-			<td class="corpsFonce" align="right"><?=_s("PrÈnom");?></td>
+			<td class="corpsFonce" align="right"><?=_s("Pr√©nom");?></td>
 			<td><INPUT size="14" style="font-size:11px;" TYPE="text" NAME="filter[prenomPatient]" value="<?=$filter['prenomPatient']?>"></td>
-			<td class="corpsFonce" align="right"><?=_s("N∞Demande");?></td>
+			<td class="corpsFonce" align="right"><?=_s("N¬∞Demande");?></td>
 			<td><INPUT size="14" style="font-size:11px;" TYPE="text" NAME="filter[numDemande]" value="<?=$filter['numDemande']?>"></td>
 		</tr>
 		<tr class=corps>
@@ -238,24 +238,24 @@ elseif ($patientLogged->niveau=="preleveur") {
 			<td class="corpsFonce" align="right"><?=_s("Date naissance");?></td>
 			<td><?=navGetInputDate(Array("id" => "dateNaissance", "name" => "filter[dateNaissance]", "dataType" => "date", "value" => $filter['dateNaissance']),true,false,true,false,true)?></td>
 			<td class="corpsFonce" align="right"><label for="orderIntervenant"><?=_s("Grouper");?></label></td>
-			<td><label><input type="checkbox" name="filter[orderIntervenant]" id="orderIntervenant" value="1"  <?=(($filter['orderIntervenant']==1)?("CHECKED"):(""))?>> <?=_s("par prÈleveur");?></label></td>
-		</tr>
-		<tr class=corps>
-			<td class="corpsFonce" align="right"><?=_s("PÈriode du")?></td>
-			<td><?=navGetInputDate(Array("id" => "dateDebut", "name" => "filter[dateDebut]", "dataType" => "date", "value" => $filter['dateDebut']),true,false,true,false,true)?></td>
-			<td class="corpsFonce" align="right">&nbsp;<?=_s("au");?></td>
-			<td><?=navGetInputDate(Array("id" => "dateFin", "name" => "filter[dateFin]", "dataType" => "date", "value" => $filter['dateFin']),true,false,true,false,true)?></td>
-		</tr>
-		<tr>
-			<td colspan="6">
-				<INPUT TYPE="submit" VALUE='<?=_s("Rechercher");?>' onclick="clickRecherche();" />
-				<INPUT TYPE="submit" VALUE='<?=_s("Effacer le filtre");?>' onclick="getById('form_choix').value='reset'; clickRecherche();" />
-			</td>
-		</tr>
-	</table>
-</FORM>
+<?php	
+	<?php if ($nbDemandes>=100) {
+				<?php if ($filter['sort']=="dossier"): ?>
+				<?php else: ?>
+				<?php endif; ?>
+				<?php if ($filter['sort']=="patient"): ?>
+				<?php else: ?>
+				<?php endif; ?>
+				<?php if ($filter['sort']=="date" || empty($filter['sort'])|| $filter['sort'] == ''): ?>
+				<?php else: ?>
+				<?php endif; ?></div>
+		<?php 
+				<?php
+					<?php
+						<?php
+				<?php } } } ?>
 
-<?	
+<?php	
 	/* Affichage de la liste */
 	$nbDemandes = 0;
 	if (is_array($newListeDemandes)) {
@@ -264,11 +264,11 @@ elseif ($patientLogged->niveau=="preleveur") {
 ?>
 <div id="div_content">
 	<? if ($nbDemandes>=100) {
-		echo "<div align='center'>"._s("L'affichage est limitÈ ‡ 100 demandes.")."</div>";
+		echo "<div align='center'>"._s("L'affichage est limit√© √† 100 demandes.")."</div>";
 	 } ?>
 
 	<div align="center">
-		<?=sprintf(_s("%s demande(s) trouvÈe(s)"),$nbDemandes);?>&nbsp;
+		<?=sprintf(_s("%s demande(s) trouv√©e(s)"),$nbDemandes);?>&nbsp;
 	</div>		
 		
 	<table align=center cellpadding=1 cellspacing=1 border=0 width=98% style="border:1px solid #ccc;">
@@ -307,7 +307,7 @@ elseif ($patientLogged->niveau=="preleveur") {
 			if (is_array($newListeDemandes)) { foreach($newListeDemandes as $nomInt => $listeDemandes) {
 				if ($filter['orderIntervenant'] == 1 && !empty($listeDemandes)) { 
 					echo "<tr class=titre>
-						<td colspan=5 align=center><b>"._s("PrÈleveur")." : "._secho($nomInt, "hde")."</b></td>
+						<td colspan=5 align=center><b>"._s("Pr√©leveur")." : "._secho($nomInt, "hde")."</b></td>
 					</tr>";
 				}
 				foreach ($listeDemandes as $key => $data) { ?>
@@ -331,7 +331,7 @@ elseif ($patientLogged->niveau=="preleveur") {
 						<nobr><a class='img' href='afficheDossier.php?sNumDossier=<?=$data['numDemande'];?>&sIdDossier=<?=$data['idDemande'];?>'><img border=0 src='<?=imagePath("icoloupe.gif");?>' /></a>
 						<?
 							if (is_array($data["derniereVisu"])) {
-								echo "<img border=0 src=\"".imagePath("icoInfo.gif")."\" title=\"".sprintf(_s("Dernier accËs le %s par %s"), $data["derniereVisu"]["date"], $data["derniereVisu"]["nom"])."\" />";
+								echo "<img border=0 src=\"".imagePath("icoInfo.gif")."\" title=\"".sprintf(_s("Dernier acc√®s le %s par %s"), $data["derniereVisu"]["date"], $data["derniereVisu"]["nom"])."\" />";
 							}
 						?></nobr>
 					</td> 
@@ -400,7 +400,7 @@ elseif ($patientLogged->niveau=="medecin" || $patientLogged->niveau=="correspond
 			}
 			$filter = $_SESSION['filter'];
 		}else{
-			/* Filtre par dÈfaut */
+			/* Filtre par d√©faut */
 			$filter = Array(
 				'nomPatient'=>'', 
 				'prenomPatient'=>'', 
@@ -437,7 +437,7 @@ elseif ($patientLogged->niveau=="medecin" || $patientLogged->niveau=="correspond
 		if($patientLogged->isAuth()) {
 			$patientLogged->logout();
 		}
-		klRedir("denied.php?type=".$_SESSION["loginError"],1,"<span style=\"color:red;\">"._s("L'authentification a ÈchouÈ")."</span>");
+		klRedir("denied.php?type=".$_SESSION["loginError"],1,"<span style=\"color:red;\">"._s("L'authentification a √©chou√©")."</span>");
 		afficheFoot();
 		die();
 	}
@@ -486,44 +486,44 @@ elseif ($patientLogged->niveau=="medecin" || $patientLogged->niveau=="correspond
 			$valueNumRecherche .=  $filter['numIPP'];
 		}
 	} else {
-		$labelNumRecherche = _s("N∞Dem/ADM/IPP");
-	}
-?>
-<FORM id="form_filter" NAME="principal" METHOD="POST" ACTION="consultation.php">
-	<input id="form_choix" type="hidden" name="choix" value="filtrer" />
-	<input id="filter_sort" type="hidden" name="filter[sort]" value="<?=$filter['sort']?>" />
-	<? if ($_SESSION['accesPermalinkLevel']==2) { ?> 
-	<INPUT NAME="filter[numIPP]" value="<?=$filter['numIPP']?>" TYPE="hidden" />
-	<? } ?>
-	<table align="center" width="98%">
-		<tr class=corps>
-			<td class="corpsFonce" align="right"><?=_s("Nom usuel");?></td>
-			<td><INPUT size="14" style="font-size:11px;" TYPE="text" NAME="filter[nomPatient]" value="<?=$filter['nomPatient']?>" <?=($_SESSION['accesPermalinkLevel']==2?"disabled":"");?> /></td>
-			<td class="corpsFonce" align="right"><?=_s("PrÈnom");?></td>
-			<td><INPUT size="14" style="font-size:11px;" TYPE="text" NAME="filter[prenomPatient]" value="<?=$filter['prenomPatient']?>" <?=($_SESSION['accesPermalinkLevel']==2?"disabled":"");?>></td>
-			<td class="corpsFonce" align="right"><?=$labelNumRecherche;?></td>
-			<td><INPUT style="font-size:11px;width:150px;" NAME="filter[numDemande]" value="<?=$filter['numDemande']?>" <?=($_SESSION['accesPermalinkLevel']==2?"TYPE=\"hidden\">".$valueNumRecherche:"TYPE=\"text\">");?></td>	
+	<?php if ($_SESSION['accesPermalinkLevel']==2) { ?> 
+	<?php } ?>
+			<td><?php $argsDateNaissance = Array("style"=>"font-size:11px;","id" => "dateNaissance", "name" => "filter[dateNaissance]", "dataType" => "date", "value" => $filter['dateNaissance']);
+					<?php 
+		<?php if($patientLogged->niveau=="correspondant"): ?>
+					<?php foreach ($listeMedecins as $id => $data): ?>
+					<?php endforeach; ?>
+					<?php foreach ($listeCorrespondants as $id => $data): ?>
+					<?php endforeach; ?>
+		<?php endif; ?>
+<?php
+	<?php if ($nbDemandes>=100) {
+				<?php if ($filter['sort']=="dossier"): ?>
+				<?php else: ?>
+				<?php endif; ?>
+				<?php if ($filter['sort']=="patient"): ?>
+				<?php else: ?>
+				<?php endif; ?>
+				<?php if ($filter['sort']=="date" || empty($filter['sort'])|| $filter['sort'] == ''): ?>
+				<?php else: ?>
+				<?php endif; ?></div>
+		<?php 
+								<?php if ($nomInt[0] == "M") { ?>
+								<?php } else if ($nomInt[0] == "C") { ?>
+								<?php } ?>
+					<?php }
+							<td><?php if($afficheDossierLien) { ?>
+									<?php
+								<?php } else { 
+								<?php if($afficheDossierLien) { ?>
+								<?php } else {
+					<?php }
+<?php
+<?php	
+			</td>
 		</tr>
 		<tr class=corps>
-			<td class="corpsFonce" align="right"><?=_s("Nom naissance");?></td>
-			<td><INPUT size="14" style="font-size:11px;" TYPE="text" NAME="filter[nomNaissancePatient]" value="<?=$filter['nomNaissancePatient']?>" <?=($_SESSION['accesPermalinkLevel']==2?"disabled":"");?> /></td>
-			<td class="corpsFonce" align="right"><?=_s("Date naissance");?></td>
-			<td><? $argsDateNaissance = Array("style"=>"font-size:11px;","id" => "dateNaissance", "name" => "filter[dateNaissance]", "dataType" => "date", "value" => $filter['dateNaissance']);
-				$afficheIconeDate = true;
-				if ($_SESSION['accesPermalinkLevel']==2) { $argsDateNaissance["disabled"] = "disabled"; $afficheIconeDate = false; }
-				echo navGetInputDate($argsDateNaissance,true,false,$afficheIconeDate,false,true,"16")?>
-			</td>
-			<td class="corpsFonce" align="right"><?=_s("Etat de demande");?></td>
-			<td>
-				<select name="filter[etat]" style="width:150px;font-size:11px;">
-					<option value="tout" <?=(($filter['etat']!="enCours" && $filter['etat']!="valide")?"selected":"") ?>><?=_s("Tout");?></option>
-					<option value="enCours" <?=(($filter['etat']=="enCours")?"selected":"") ?>><?=_s("En cours");?></option>
-					<option value="valide" <?=(($filter['etat']=="valide")?"selected":"") ?>><?=_s("ValidÈe");?></option>
-				</select>
-			</td>
-		</tr>
-		<tr class=corps>
-			<td class="corpsFonce" align="right"><?=_s("PÈriode du");?></td>
+			<td class="corpsFonce" align="right"><?=_s("P√©riode du");?></td>
 			<td><?=navGetInputDate(Array("style"=>"font-size:11px;","id" => "dateDebut", "name" => "filter[dateDebut]", "dataType" => "date", "value" => $filter['dateDebut']),true,false,true,false,true,"16")?></td>
 			<td class="corpsFonce" align="right">&nbsp;<?=_s("au");?></td>
 			<td><?=navGetInputDate(Array("style"=>"font-size:11px;","id" => "dateFin", "name" => "filter[dateFin]", "dataType" => "date", "value" => $filter['dateFin']),true,false,true,false,true,"16")?></td>
@@ -531,8 +531,8 @@ elseif ($patientLogged->niveau=="medecin" || $patientLogged->niveau=="correspond
 			<td>
 				<select name="filter[consulte]" style="width:150px;font-size:11px;">
 					<option value="tout" <?=(($filter['consulte']!="pasVu" && $filter['consulte']!="dejaVu")?"selected":"")?>>Tout</option>
-					<option value="pasVu" <?=(($filter['consulte']=="pasVu")?"selected":"")?>>Non consultÈ</option>
-					<option value="dejaVu" <?=(($filter['consulte']=="dejaVu")?"selected":"")?>>DÈj‡ consultÈ</option>
+					<option value="pasVu" <?=(($filter['consulte']=="pasVu")?"selected":"")?>>Non consult√©</option>
+					<option value="dejaVu" <?=(($filter['consulte']=="dejaVu")?"selected":"")?>>D√©j√† consult√©</option>
 				</select>
 			</td>
 		</tr>
@@ -563,7 +563,7 @@ elseif ($patientLogged->niveau=="medecin" || $patientLogged->niveau=="correspond
 		</tr>
 		<? if($patientLogged->niveau=="correspondant"): ?>
 		<tr class=corps>
-			<td class="corpsFonce" align="right"><?=_s("MÈdecin");?></td>
+			<td class="corpsFonce" align="right"><?=_s("M√©decin");?></td>
 			<td colspan="3">
 				<select name="filter[idMedecin]" style="width:250px;font-size:11px;">
 					<option value=""><?=_s("Filtrer")?></option>
@@ -605,14 +605,14 @@ elseif ($patientLogged->niveau=="medecin" || $patientLogged->niveau=="correspond
 
 <div id="div_content">
 	<? if ($nbDemandes>=100) {
-		echo "<div align='center'>"._s("L'affichage est limitÈ ‡ 100 demandes.")."</div>";
+		echo "<div align='center'>"._s("L'affichage est limit√© √† 100 demandes.")."</div>";
 	 } ?>	
 
 	<div align="center">
-		<?=sprintf(_s("%s demande(s) trouvÈe(s)"),$nbDemandes);?>&nbsp;
+		<?=sprintf(_s("%s demande(s) trouv√©e(s)"),$nbDemandes);?>&nbsp;
 		<span class="analyse"><?=_s("CODE");?></span> : <?=_s("en cours");?> &nbsp;
-		<span class="analysevalide"><?=_s("CODE");?></span> : <?=_s("validÈ");?> &nbsp;
-		<span class="analysenew"><?=_s("CODE");?></span> : <?=_s("nouveaux rÈsultats");?> &nbsp;
+		<span class="analysevalide"><?=_s("CODE");?></span> : <?=_s("valid√©");?> &nbsp;
+		<span class="analysenew"><?=_s("CODE");?></span> : <?=_s("nouveaux r√©sultats");?> &nbsp;
 		<span class="analysehorsborne"><?=_s("CODE");?></span> : <?=_s("hors-borne");?> &nbsp;
 	</div>		
 		
@@ -655,7 +655,7 @@ elseif ($patientLogged->niveau=="medecin" || $patientLogged->niveau=="correspond
 						<tr class=titre>
 							<td colspan=5 align=center><b>
 								<? if ($nomInt[0] == "M") { ?>
-									<?=_s("MÈdecin");?> : <?= _secho(substr($nomInt, 2)); ?>
+									<?=_s("M√©decin");?> : <?= _secho(substr($nomInt, 2)); ?>
 								<? } else if ($nomInt[0] == "C") { ?>
 									<?=_s("Correspondant");?> : <?= _secho(substr($nomInt, 2)); ?>
 								<?} ?>
@@ -680,12 +680,12 @@ elseif ($patientLogged->niveau=="medecin" || $patientLogged->niveau=="correspond
 									<nobr><a class="img" href="afficheDossier.php?sNumDossier=<?=$data['numDemande']?>&sIdDossier=<?=$data['idDemande']?>"><img border=0 src="<?=imagePath("icoloupe.gif")?>" /></a>
 									<?
 										if (is_array($data["derniereVisu"])) {
-											$strVisuTitle = sprintf(_s("Dernier accËs le %s par %s"), $data["derniereVisu"]["date"], $data["derniereVisu"]["nom"]);
+											$strVisuTitle = sprintf(_s("Dernier acc√®s le %s par %s"), $data["derniereVisu"]["date"], $data["derniereVisu"]["nom"]);
 											echo "<img border=0 src=\"".imagePath("icoInfo.gif")."\" title=\"".$strVisuTitle."\" />";
 										}
 									?></nobr>
 								<? } else { 
-										echo "<img border=0 src=\"".imagePath("icosablier.gif")."\" title=\""._s("Demande non validÈe")."\" />";
+										echo "<img border=0 src=\"".imagePath("icosablier.gif")."\" title=\""._s("Demande non valid√©e")."\" />";
 								} ?>
 							</td> 
 							<td align="center"><nobr>

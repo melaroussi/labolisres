@@ -1,4 +1,4 @@
-<?                                  
+<?php                                  
 
 include_once ("include/conf.inc.php");
 include_once ("include/lib.inc.php");
@@ -46,7 +46,7 @@ if($type == "CBI" && isset($_GET['token'])) {
 	// pas de sleep pour le bon focntionnement de l'interface
 	die();
 }
-sleep(10); // pour éviter le brutforce
+sleep(10); // pour Ã©viter le brutforce
 header("HTTP/1.0 403 Forbidden");
 
 ?>

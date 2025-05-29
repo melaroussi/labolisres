@@ -1,6 +1,6 @@
-<?                                  
+<?php                                  
  /**                                
-  * Page d'identification et de consultation des résultats                     
+?><?php
   *                                 
   *        		                 
   * @package KaliLab                
@@ -30,17 +30,17 @@ if($choix == "changePassword") {
 					$sc = new SoapClientKalires();
 					$changePassw = $sc->changePassword($sNiveau, $sLogin, $sPasswordOld, $sPassword1);
 					if($changePassw->result == "1") {
-						$sMsg=""._s("Le nouveau mot de passe a bien été enregistré")."";
+						$sMsg=""._s("Le nouveau mot de passe a bien Ã©tÃ© enregistrÃ©")."";
 					} elseif($changePassw->result == "2") {
-						$sMsg="<font color=red>"._s("Erreur : le nouveau mot de passe doit être différent de l'ancien")."</font>";
+						$sMsg="<font color=red>"._s("Erreur : le nouveau mot de passe doit Ãªtre diffÃ©rent de l'ancien")."</font>";
 					} else {
-						$sMsg="<font color=red>"._s("Erreur : le changement de mot de passe a échoué")."</font>";
+						$sMsg="<font color=red>"._s("Erreur : le changement de mot de passe a Ã©chouÃ©")."</font>";
 					}
 				} else {
 					$sMsg="<font color=red>"._s("Erreur : les 2 mots de passe ne sont pas identiques")."</font>";
 				}
 			} else {
-				$sMsg="<font color=red>"._s("Erreur : le mot de passe doit faire au minimum 5 caractères")."</font>";
+				$sMsg="<font color=red>"._s("Erreur : le mot de passe doit faire au minimum 5 caractÃ¨res")."</font>";
 			}
 		} else if($sPassword1 != "" || $sPassword2 != ""){
 			$sMsg="<font color=red>"._s("Erreur : veuillez remplir tous les champs requis pour le changement de mot de passe")."</font>";
@@ -51,7 +51,7 @@ if($choix == "changePassword") {
 			$patientLogged->setOptionUtilisateur(Array("kaliresMail"=>($kaliResOpt["kaliresMail"])?$kaliResOpt["kaliresMail"]:"0"),$patientLogged->id,$patientLogged->niveau);
 			$br = "";
 			if($sMsg != "") $br = "</br>";
-			$sMsg.= $br._s("Options personnelles enregistrées")."";
+			$sMsg.= $br._s("Options personnelles enregistrÃ©es")."";
 			$optSaved = true;
 		}
 		
@@ -61,15 +61,15 @@ if($choix == "changePassword") {
 			if(!$optSaved) {
 				$br = "";
 				if($sMsg != "") $br = "</br>";
-				$sMsg.= $br._s("Options personnelles enregistrées")."";
-				$optSaved = true;
-			}
-		}
-		
-	} else {
-		$sMsg="<font color=red>"._s("Erreur : session incorrecte")."</font>";
-	}
-}
+		<tr class=titre><td align=center colspan=2><?php echo _s("Options personnelles :")?></td></tr>
+		<tr><td align=right><?php echo _s("Identifiant")?> : </td><td><?=(($patientLogged->niveau=="patient")?($patientLogged->numPermanent):($patientLogged->numIdentification));?></td></tr>
+		<?php			
+		<tr class=titre><td align=center colspan=2><?php echo _s("Changement de mot de passe :")?></td></tr>
+		<tr><td align=right><?php echo _s("Mot de passe actuel")?> : </td><td><input type="Password" value="" name="sPasswordOld" autocomplete="off" ></td></tr>
+		<tr><td align=right><?php echo _s("Nouveau mot de passe")?> : </td><td><input type="Password" value="" name="sPassword1" autocomplete="off" ></td></tr>
+		<tr><td align=right><?php echo _s("Nouveau mot de passe (vrification)")?> : </td><td><input type="Password" value="" name="sPassword2" autocomplete="off" ></td></tr>	
+	<center><input type="submit" name="send" value="<?php echo _s("Enregistrer")?>"></center>
+<?php
 unset($_SESSION["keyForm"]);
 
 afficheMessage($sMsg);
@@ -88,13 +88,13 @@ echo "<input type=hidden name=choix value=\"changePassword\">"
 		<?			
 			if($patientLogged->niveau=="medecin" || $patientLogged->niveau=="correspondant") {			
 				echo "<tr>
-						<td align=right>"._s("Notification par mail pour chaque demande validée")." : </td>
+						<td align=right>"._s("Notification par mail pour chaque demande validÃ©e")." : </td>
 						<td><label><input TYPE=\"checkbox\" id=\"kaliResOpt[kaliresMail]\" NAME=\"kaliResOpt[kaliresMail]\" VALUE=\"1\" ".(($patientLogged->getOptionUtilisateur("kaliresMail")>0)?("checked"):(""))." > "._s("Oui")."</label></td>
 					</tr>";
 			}
 			if($patientLogged->niveau=="medecin" || $patientLogged->niveau=="correspondant" || $patientLogged->niveau=="preleveur") {			
 				echo "<tr>
-						<td align=right>"._s("Effacer les filtres de recherche à chaque connexion")." : </td>
+						<td align=right>"._s("Effacer les filtres de recherche Ã  chaque connexion")." : </td>
 						<td><label><input TYPE=\"checkbox\" id=\"userOption[clearFilter]\" NAME=\"userOption[clearFilter]\" VALUE=\"1\" ".(($patientLogged->userOption["clearFilter"]>0)?("checked"):(""))." > "._s("Oui")."</label></td>
 					</tr>";
 			}
@@ -103,7 +103,7 @@ echo "<input type=hidden name=choix value=\"changePassword\">"
 		<tr class=titre><td align=center colspan=2><?echo _s("Changement de mot de passe :")?></td></tr>
 		<tr><td align=right><?echo _s("Mot de passe actuel")?> : </td><td><input type="Password" value="" name="sPasswordOld" autocomplete="off" ></td></tr>
 		<tr><td align=right><?echo _s("Nouveau mot de passe")?> : </td><td><input type="Password" value="" name="sPassword1" autocomplete="off" ></td></tr>
-		<tr><td align=right><?echo _s("Nouveau mot de passe (vérification)")?> : </td><td><input type="Password" value="" name="sPassword2" autocomplete="off" ></td></tr>	
+		<tr><td align=right><?echo _s("Nouveau mot de passe (vÃ©rification)")?> : </td><td><input type="Password" value="" name="sPassword2" autocomplete="off" ></td></tr>	
 	</table>
 	<br/>
 	<center><input type="submit" name="send" value="<?echo _s("Enregistrer")?>"></center>

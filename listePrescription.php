@@ -13,7 +13,7 @@ echo "<H1>"._s("Liste des prescriptions")."</H1>";
 
 
 if (!$_SESSION["accesPC"]) {
-	klredir("consultation.php", 3, _s("Vous n'avez pas accès à cette page."));
+	klredir("consultation.php", 3, _s("Vous n'avez pas accÃ¨s Ã  cette page."));
 	die;
 }
 
@@ -52,7 +52,7 @@ if (!$_SESSION["accesPC"]) {
 	}
 </script>
 
-<?
+<?php
 
 	if ($_POST['choix'] == 'reset') {
 		unset($filterLP);
@@ -65,7 +65,7 @@ if (!$_SESSION["accesPC"]) {
 		if (isset($_SESSION['filterLP']))
 			$filterLP = $_SESSION['filterLP'];
 		else
-			/* Filtre par défaut */
+			/* Filtre par dÃ©faut */
 			$filterLP = Array(
 				'nomPatient'=>'', 
 				'prenomPatient'=>'', 
@@ -91,15 +91,15 @@ if (!$_SESSION["accesPC"]) {
 		<tr class=corps>
 			<td class="corpsFonce" align="right"><?= _s("Nom usuel") ?></td>
 			<td><INPUT size="14" style="font-size:11px;" TYPE="text" NAME="filterLP[nomPatient]" value="<?=$filterLP['nomPatient']?>" /></td>
-			<td class="corpsFonce" align="right"><?= _s("Prénom") ?></td>
+			<td class="corpsFonce" align="right"><?= _s("PrÃ©nom") ?></td>
 			<td><INPUT size="14" style="font-size:11px;" TYPE="text" NAME="filterLP[prenomPatient]" value="<?=$filterLP['prenomPatient']?>"></td>
 			<td class="corpsFonce" align="right"><?= _s("Date naissance") ?></td>
 			<td><?=navGetInputDate(Array("style"=>"font-size:11px;","id" => "dateNaissance", "name" => "filterLP[dateNaissance]", "dataType" => "date", "value" => $filterLP['dateNaissance']),true,false,true,false,true,"16")?></td>
 		</tr>
 		<tr class=corps>
-			<td class="corpsFonce" align="right"><?= _s("N°Dem/ADM/IPP") ?></td>
+			<td class="corpsFonce" align="right"><?= _s("NÂ°Dem/ADM/IPP") ?></td>
 			<td><INPUT size="14" style="font-size:11px;" TYPE="text" NAME="filterLP[numDemande]" value="<?=$filterLP['numDemande']?>"></td>
-			<td class="corpsFonce" align="right"><?= _s("Période du") ?></td>
+			<td class="corpsFonce" align="right"><?= _s("PÃ©riode du") ?></td>
 			<td><?=navGetInputDate(Array("style"=>"font-size:11px;","id" => "dateDebut", "name" => "filterLP[dateDebut]", "dataType" => "date", "value" => $filterLP['dateDebut']),true,false,true,false,true,"16")?></td>
 			<td class="corpsFonce" align="right">&nbsp;<?= _s("au") ?></td>
 			<td><?=navGetInputDate(Array("style"=>"font-size:11px;","id" => "dateFin", "name" => "filterLP[dateFin]", "dataType" => "date", "value" => $filterLP['dateFin']),true,false,true,false,true,"16")?></td>
@@ -109,38 +109,38 @@ if (!$_SESSION["accesPC"]) {
 			<td>
 				<select name="filterLP[etat]" style="width:120px;font-size:11px;">
 					<option value="tout" <?=(($filterLP['etat']!="enCours" && $filterLP['etat']!="valide")?"selected":"") ?>><?= _s("Tout") ?></option>
-					<option value="saisie" <?=(($filterLP['etat']=="saisie")?"selected":"") ?>><?= _s("Enregistrée") ?></option>
-					<option value="valide" <?=(($filterLP['etat']=="valide")?"selected":"") ?>><?= _s("Validée") ?></option>
-					<option value="cloture" <?=(($filterLP['etat']=="cloture")?"selected":"") ?>><?= _s("Saisie") ?></option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="4">
-				<INPUT TYPE="submit" VALUE='<?=_s("Rechercher");?>' onclick="clickRecherche();" />
-				<INPUT TYPE="submit" VALUE='<?=_s("Effacer le filtre");?>' onclick="getById('form_choix').value='reset'; clickRecherche();" />
-			</td>
-		</tr>
-	</table>
-</FORM>
-
-
-<?
-
-	$nbPC = count($listePrescription["dossierSaisi"]["cloture"]) + count($listePrescription["dossierNonSaisi"]["pcval"]) + count($listePrescription["dossierNonSaisi"]["pcsaisie"]);
-
-?>
-
-
-<div id="div_content">
+<?php
+		<?php 
+							<?php if ($etatDossier == "dossierNonSaisi") { ?>
+							<?php } else if  ($etatDossier == "dossierSaisi") { ?>
+							<?php } ?>
+				<?php
+									<?php if ($PCEtat == "pcsaisie") { 
+							</tr> <?php
+									<?php if ($data['status']) {  ?>
+									<?php } else { ?>
+									<?php }	?>
+								 		<?php if ($data["numDemande"]) { 
+										<?php } else if ($donneeHprim["numPermanent"]) { 
+										<?php } else if ($donneeHprim["numPatientExterne"]) {
+										<?php } else if ($donneeHprim["numDemandeExterne"]) {
+										<?php } else if ($donneeHprim["caisse"]["numeroSecu"]) {
+										<?php } ?>
+									<?php if ($data['status']) {  ?>
+										<?php echo getDemandeStatusStr($data['status']); ?>
+									<?php } else { ?>
+										<?php echo "<i>"._s("Non saisie")."</i>"; ?>
+									<?php }?>
+						<?php }
+<?php
 	<div align="center">
-		<?= sprintf(_s("%s prescription(s) trouvée(s)"),$nbPC);?>
+		<?= sprintf(_s("%s prescription(s) trouvÃ©e(s)"),$nbPC);?>
 	</div>		
 		
 
 	<table align=center cellpadding=1 cellspacing=1 border=0 width=98% style="border:1px solid #ccc;">
 		<tr class=titreBleu>
-			<td colspan=2 width=20%><div ><?=_s("Numéro") ?>&nbsp;
+			<td colspan=2 width=20%><div ><?=_s("NumÃ©ro") ?>&nbsp;
 			</td>
 			<td width=30%><div ><?= _s("Patient") ?>&nbsp;</div>
 			</td>
@@ -171,15 +171,15 @@ if (!$_SESSION["accesPC"]) {
 							?> <tr class="sousTitrePC">
 								<td colspan=5 align=center><b>
 									<? if ($PCEtat == "pcsaisie") { 
-										echo _s("Prescriptions enregistrées (à valider)");
+										echo _s("Prescriptions enregistrÃ©es (Ã  valider)");
 									 } else if  ($PCEtat == "pcval") { 
-										echo _s("Prescriptions validées");
+										echo _s("Prescriptions validÃ©es");
 									} ?>
 								</b></td>
 							</tr> <?
 						}
-						$qtipNS = (isSrOption("typeLabo","maroc") ? _s("N° CIN du patient : ") : _s("NSS du patient : ") );
-						$labelNS = (isSrOption("typeLabo","maroc") ? _s("N° CIN") : _s("NSS") );
+						$qtipNS = (isSrOption("typeLabo","maroc") ? _s("NÂ° CIN du patient : ") : _s("NSS du patient : ") );
+						$labelNS = (isSrOption("typeLabo","maroc") ? _s("NÂ° CIN") : _s("NSS") );
 						foreach($dossier as $key=>$data) {
 							
 							$donneeHprim = unserialize($data["donneeHPRIM"]);
@@ -193,19 +193,19 @@ if (!$_SESSION["accesPC"]) {
 
 						    $qtipInfo = "";
 							if ($data["numDemande"]) { 
-					 			$qtipInfo .= _s("N° de demande Kalisil : ").$data["numDemande"]."<br />";
+					 			$qtipInfo .= _s("NÂ° de demande Kalisil : ").$data["numDemande"]."<br />";
 							} if ($donneeHprim["numPermanent"]) { 
-								$qtipInfo .= _s("N° patient KaliSil : "). $donneeHprim["numPermanent"]."<br />";
+								$qtipInfo .= _s("NÂ° patient KaliSil : "). $donneeHprim["numPermanent"]."<br />";
 						 	} if ($donneeHprim["numPatientExterne"]) {
 								$qtipInfo .= _s("IPP du patient : "). $donneeHprim["numPatientExterne"]."<br />";
 							} if ($donneeHprim["numDemandeExterne"]) {
-								$qtipInfo .= _s("N° d'admission : "). $donneeHprim["numDemandeExterne"]."<br />";
+								$qtipInfo .= _s("NÂ° d'admission : "). $donneeHprim["numDemandeExterne"]."<br />";
 						 	} if ($donneeHprim["caisse"]["numeroSecu"]) {
 								$qtipInfo .= $qtipNS.$donneeHprim["caisse"]["numeroSecu"]."<br />";
 							}
 
 							if ($data["saisieDate"] && $data["saisieDate"]) {
-								$qtipInfoDmd = _s("Demande saisie le ") . afficheDate($data["saisieDate"]) . _s(" à ") . $data["saisieHeure"];
+								$qtipInfoDmd = _s("Demande saisie le ") . afficheDate($data["saisieDate"]) . _s(" Ã  ") . $data["saisieHeure"];
 							}
 						?>
 							<tr style="height:25px" class="corpsFonce" >
@@ -219,10 +219,10 @@ if (!$_SESSION["accesPC"]) {
 								<td align="center" style="border: 30px; marging-left: 0; padding-left: 0; " class="defaultCursor qtipOn" help="<?= $qtipInfo ?>" width="16%" >
 								 	<nobr>
 								 		<? if ($data["numDemande"]) { 
-								 			echo _s("N°Demande")." ".$data["numDemande"]; ?>
+								 			echo _s("NÂ°Demande")." ".$data["numDemande"]; ?>
 									</nobr><nobr>
 										<? } else if ($donneeHprim["numPermanent"]) { 
-											echo  _s("N°Patient")." ". $donneeHprim["numPermanent"]; ?>
+											echo  _s("NÂ°Patient")." ". $donneeHprim["numPermanent"]; ?>
 									</nobr><nobr>
 										<? } else if ($donneeHprim["numPatientExterne"]) {
 											echo  _s("IPP")." ". $donneeHprim["numPatientExterne"]; ?>

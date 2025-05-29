@@ -1,4 +1,4 @@
-<?                                  
+<?php                                  
  /**                                
   * Ouverture d'un fichier en mode streaming                     
   *                                 
@@ -20,7 +20,7 @@ $doUnlink = false;
 
 if($_GET['src'] == "referentiel") {
 	if ($_SESSION["refAnalyse"] == 0) {
-		klredir("consultation.php", 3, _s("Vous n'avez pas accès à cette page."));
+		klredir("consultation.php", 3, _s("Vous n'avez pas accÃ¨s Ã  cette page."));
 		die;
 	}
 

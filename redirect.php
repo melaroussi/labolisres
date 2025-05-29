@@ -1,4 +1,4 @@
-<?                                  
+<?php                                  
 
 include_once ("include/conf.inc.php");
 include_once ("include/lib.inc.php");
@@ -39,9 +39,9 @@ if(is_a($patientLogged,'PatientLogged') && $patientLogged->id() > 0 && $patientL
 			$paiement->set("customerId", $params['patientId']);
 			$retour = $retPaiement["paiement"];
 			if ($retour == "OK") {
-				echo klMessage("info", "Retour de paiement", "Le paiement a réussi et a été enregistré dans la demande.");
+				echo klMessage("info", "Retour de paiement", "Le paiement a rÃ©ussi et a Ã©tÃ© enregistrÃ© dans la demande.");
 			} else if ($retour == "NOK") {
-				echo klMessage("error", "Retour de paiement", "Le paiement a échoué, veuillez essayer à nouveau.");
+				echo klMessage("error", "Retour de paiement", "Le paiement a Ã©chouÃ©, veuillez essayer Ã  nouveau.");
 
 			}
 		}
@@ -67,7 +67,7 @@ if(is_a($patientLogged,'PatientLogged') && $patientLogged->id() > 0 && $patientL
 		die();
 	}
 
-	afficheMessage("<font color=red>"._s("Erreur : Vous n'avez pas accès à ce dossier, veuillez signaler ce problème au laboratoire")."</font>");
+	afficheMessage("<font color=red>"._s("Erreur : Vous n'avez pas accÃ¨s Ã  ce dossier, veuillez signaler ce problÃ¨me au laboratoire")."</font>");
 	afficheFoot();
 	die();
 		
@@ -79,7 +79,7 @@ if(is_a($patientLogged,'PatientLogged') && $patientLogged->id() > 0 && $patientL
 	
 }
 
-klRedir("denied.php?type=redirect",10,"<span style=\"color:red;\">"._s("L'authentification a échoué")."</span>"); // pour éviter le brutforce
+klRedir("denied.php?type=redirect",10,"<span style=\"color:red;\">"._s("L'authentification a Ã©chouÃ©")."</span>"); // pour Ã©viter le brutforce
 afficheFoot();
 die();
 

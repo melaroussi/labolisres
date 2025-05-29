@@ -1,4 +1,4 @@
-<?
+<?php
 
 Class PatientLogged {
 
@@ -175,10 +175,10 @@ Class PatientLogged {
 		}
 		if($this->temps['update'] > 0 && $sessDuree > 0) {
 			if( ( (time()-$this->temps['update'])/60) >= $sessDuree ) {
-				afficheHead(_s("Serveur de résultats")." - ".getSrOption("laboNom"),"",false);
+				afficheHead(_s("Serveur de rÃ©sultats")." - ".getSrOption("laboNom"),"",false);
 				entete();
 				$this->logout();
-				klRedir($conf["baseURL"]."index.php",5,"Votre session a expirée suite à un délai d'inactivité trop long. Veuillez vous reconnecter.");
+				klRedir($conf["baseURL"]."index.php",5,"Votre session a expirÃ©e suite Ã  un dÃ©lai d'inactivitÃ© trop long. Veuillez vous reconnecter.");
 				die();
 			}
 		}
@@ -220,13 +220,13 @@ Class PatientLogged {
 	function filtrageNiveau($niveauLimite,$urlNonAuth,$urlNonAcces){
 		global $conf,$idSiteSelectedTransfert,$_modules;
 		if ($this->isAuth() != 1) {
-			$sMsg.=_s("Vous devez vous identifier pour accéder à cette page.")."<br /><br /><a href=\"$urlNonAuth\">"._s("Cliquez ici pour vous identifier")."</a>";
+			$sMsg.=_s("Vous devez vous identifier pour accÃ©der Ã  cette page.")."<br /><br /><a href=\"$urlNonAuth\">"._s("Cliquez ici pour vous identifier")."</a>";
 			echo "<br><br><p>";
 			afficheMessage($sMsg,"width:450px;");
 			echo "<TABLE HEIGHT=75% WIDTH=100%><TR valign=middle><TD align=center><a href=\"$urlNonAuth\"><IMG BORDER=0 SRC='".$conf["baseURL"]."images/seringue2.gif'></a></TD></TR></TABLE></a>";
 			die();
 		} elseif( ($niveauLimite == "administrateur") || ($niveauLimite == "admin") ) {
-			$sMsg.=_s("Vous devez vous identifier pour accéder à cette page.")."<br /><br /><a href=\"$urlNonAuth\">"._s("Cliquez ici pour vous identifier")."</a>";
+			$sMsg.=_s("Vous devez vous identifier pour accÃ©der Ã  cette page.")."<br /><br /><a href=\"$urlNonAuth\">"._s("Cliquez ici pour vous identifier")."</a>";
 			echo "<br><br><p>";
 			afficheMessage($sMsg,"width:450px;");
 			echo "<TABLE HEIGHT=75% WIDTH=100%><TR valign=middle><TD align=center><a href=\"$urlNonAuth\"><IMG BORDER=0 SRC='".$conf["baseURL"]."images/seringue2.gif'></a></TD></TR></TABLE></a>";

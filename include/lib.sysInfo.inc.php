@@ -1,4 +1,4 @@
-<?
+<?php
 /**
   * Librairie de sysInfo
   *
@@ -10,7 +10,7 @@
   **/
   
   
-?><?
+?><?php
 class sysInfo {
     
     /**
@@ -459,7 +459,7 @@ class sysInfo {
     } 
     
     /**
-     * Récupération de l'utilisateur apache
+     * RÃ©cupÃ©ration de l'utilisateur apache
      */
     function userapache () {
     	$user = 'apache';
@@ -472,9 +472,9 @@ class sysInfo {
   
     /**
     * backup :
-    * Liste les fichiers des répertoires de backup avec les options necessaires
+    * Liste les fichiers des rÃ©pertoires de backup avec les options necessaires
     *
-    * @return array Tableau des fichiers et leurs caractéristiques
+    * @return array Tableau des fichiers et leurs caractÃ©ristiques
     * @since 14 Mai 2005
     *
     **/
@@ -521,7 +521,7 @@ class sysInfo {
 
 
 	/**
-	 * Vérifie si un paquet est installé et retourne la version 
+	 * VÃ©rifie si un paquet est installÃ© et retourne la version 
 	 */
 	function installedPackage( $pName ) {
 		$version = exec('dpkg -l | grep -E "^ii[ ]*' . $pName . '[ ]+" | awk \'{print $3}\'');
@@ -534,7 +534,7 @@ class sysInfo {
 	
 	
 	/**
-	 * Récupération des logiciels installés
+	 * RÃ©cupÃ©ration des logiciels installÃ©s
 	 */
 	function checkSoftDebian() {
 		global $_modules;
@@ -588,7 +588,7 @@ class sysInfo {
 			$lesSoft = array_merge($lesSoft, $lesSoftKalisil);
 		
 		sort($lesSoft);
-		// Récupération des versions
+		// RÃ©cupÃ©ration des versions
 		exec('dpkg -l | grep -E "^ii *('.implode(' |', $lesSoft).')" |awk \'{print $2"|"$3}\'', $versions, $ret);
 		$tab = Array();
 		foreach($versions as $s) {
@@ -596,7 +596,7 @@ class sysInfo {
 			$tab[$soft] = $version;
 		}
 		
-		// Vérifications
+		// VÃ©rifications
 		foreach($lesSoft as $s) {
 			if (isset($tab[$s])) {
 				$return[$s] = $tab[$s];
@@ -608,7 +608,7 @@ class sysInfo {
 	}
 	
 	/**
-	 * Vérifie si une appli est installée
+	 * VÃ©rifie si une appli est installÃ©e
 	 */
 	function checkSoftIsInstalled( $pkg ) {
 		if (preg_match('/^[A-Za-z0-9-]+$/', $pkg))
@@ -661,13 +661,13 @@ class sysInfo {
 	}
 	
 	/**
-	 * Récupération du nom du type de sauvegarde
+	 * RÃ©cupÃ©ration du nom du type de sauvegarde
 	 */
 	function getLsBackupName( $pName ) {
 		if ($pName == 'LOCAL')
 			return _s("Sauvegarde locale");
 		else if (preg_match('/^SSH_(.*)/', $pName, $matches)) 
-			return sprintf(_s("Sauvegarde distante sécurisée sur %s"), $matches[1]);
+			return sprintf(_s("Sauvegarde distante sÃ©curisÃ©e sur %s"), $matches[1]);
 		else if (preg_match('/^SMB_(.*)/', $pName, $matches)) 
 			return sprintf(_s("Sauvegarde distante sur partage sur %s"), $matches[1]);
 		else if (preg_match('/^FTP_(.*)/', $pName, $matches)) 
@@ -676,7 +676,7 @@ class sysInfo {
 	
 	
 	/** 
-	 * Récupération de l'heure du serveur
+	 * RÃ©cupÃ©ration de l'heure du serveur
 	 */
 	function getServerTime() {
 		return date('d-m-Y H:i:s') . ' GMT' . date("O");
@@ -699,7 +699,7 @@ class sysInfo {
 	
 	
 	
-	/* Derniere version installée */
+	/* Derniere version installÃ©e */
 	function getKaliVersion() {
 		global $cBdUniq;
 		$db = $cBdUniq->query('select version,build,nbPatch from kalilabUpdate where status="update ok" ORDER BY date DESC LIMIT 1;');
@@ -715,7 +715,7 @@ class sysInfo {
 	
 
 	/**
-	 * Recherche du type de version de zend installé
+	 * Recherche du type de version de zend installÃ©
 	 */
 	function getZendType() {
 		$ZENDGUARD = "Zend Guard Loader";
@@ -738,10 +738,10 @@ class sysInfo {
 
 /**
  * getBackupInfo :
- * Récupère les informations sur les fichiers de backup
+ * RÃ©cupÃ¨re les informations sur les fichiers de backup
  *
- * @param $amovible int Spécifie si on doit récupérer les infos de backup sur média amovible
- * @return array Tableau des fichiers et leurs caractéristiques
+ * @param $amovible int SpÃ©cifie si on doit rÃ©cupÃ©rer les infos de backup sur mÃ©dia amovible
+ * @return array Tableau des fichiers et leurs caractÃ©ristiques
  * @since 14 Mai 2005
  *
  **/
@@ -777,9 +777,9 @@ function getBackupInfo($amovible) {
 
 /**
  * createBackupCache :
- * Génère le fichier de cache des backup pour Kalilab
+ * GÃ©nÃ¨re le fichier de cache des backup pour Kalilab
  *
- * $param $integrite int Vérification de l'integrité des données
+ * $param $integrite int VÃ©rification de l'integritÃ© des donnÃ©es
  *
  * @since 14 Mai 2005
  *
@@ -797,13 +797,13 @@ function createBackupCache($integrite) {
         $integrity = verificationBackup($sysInfo['hddbackup'], $sysInfo['cdbackup']);
     
         //avec l'ancienne backup
-        /*echo "<TR class=titre><TD colspan=5>Sauvegarde Journalière</TD></TR>\n";
+        /*echo "<TR class=titre><TD colspan=5>Sauvegarde JournaliÃ¨re</TD></TR>\n";
         html_backup($sysInfo['hdd_daily_backup'], $daily_integrity);
     
         echo "<TR class=titre><TD colspan=5>Sauvegarde Mensuelle</TD></TR>\n";
         html_backup($sysInfo['hdd_monthly_backup'], $monthly_integrity);
     
-        echo "<TR class=titre><TD colspan=5>Sauvegarde Amovible Journalière</TD></TR>\n";
+        echo "<TR class=titre><TD colspan=5>Sauvegarde Amovible JournaliÃ¨re</TD></TR>\n";
         html_backup($sysInfo['cd_daily_backup'], $daily_integrity);
     
         echo "<TR class=titre><TD colspan=5>Sauvegarde Amovible Mensuelle</TD></TR>\n";
@@ -830,14 +830,14 @@ function createBackupCache($integrite) {
 
 /**
  * createBackupFtpCache :
- * Génère le fichier de cache des backup sur ftp pour Kalilab 
+ * GÃ©nÃ¨re le fichier de cache des backup sur ftp pour Kalilab 
  *
  * $param $host string hote distant
  * $param $login string utilisateur
  * $param $pass string pass
- * $param $dir string répertoire distant
+ * $param $dir string rÃ©pertoire distant
  *
- * @since 22 Août 2005
+ * @since 22 AoÃ»t 2005
  *
  **/
  
@@ -863,7 +863,7 @@ function createBackupFtpCache($dir) {
         }    
     }
     
-    //on récupère les différents répertoires pour chaque serveur
+    //on rÃ©cupÃ¨re les diffÃ©rents rÃ©pertoires pour chaque serveur
     $dirs = explode(" ", trim($dir));
     $text = "";
     
@@ -880,10 +880,10 @@ function createBackupFtpCache($dir) {
             
             $text .= "<TR><TD><B>" . _s("Nom") . "</B></TD><TD><B>" . _s("Date") . "</B></TD><TD><B>" . _s("Taille") . "</B></TD><TD><B>" . _s("Etat") . "</B></TD></TR>\n";
             
-            // la récupération a lieu en deux temps pour la présentation des données
+            // la rÃ©cupÃ©ration a lieu en deux temps pour la prÃ©sentation des donnÃ©es
             
-            // Récupération du contenu d'un dossier
-            if ( $dirs[$key] == "./" ) $dirs[$key] = ""; //obligé sinon bug avec ftp_nblist
+            // RÃ©cupÃ©ration du contenu d'un dossier
+            if ( $dirs[$key] == "./" ) $dirs[$key] = ""; //obligÃ© sinon bug avec ftp_nblist
             $contents = ftp_nlist($connId, $dirs[$key] . "backCu*");
             sort($contents);
             
@@ -895,7 +895,7 @@ function createBackupFtpCache($dir) {
                 $text .= "<TD>" . verificationBackupFtp($value, $taille) . "</TD></TR>";
             }
             
-            // Récupération du contenu d'un dossier (si dir est de la forme ./ -> bug)
+            // RÃ©cupÃ©ration du contenu d'un dossier (si dir est de la forme ./ -> bug)
             $contents = ftp_nlist($connId, $dirs[$key] . "backI*");
             arsort($contents);
             foreach ( $contents as $key2 => $value ) {
@@ -910,7 +910,7 @@ function createBackupFtpCache($dir) {
         }
         
         else {
-            $text .= "<TR><TD colspan=5><B>" . _s("Impossible de se connecter à l'hôte distant") . "</B></TD></TR>";
+            $text .= "<TR><TD colspan=5><B>" . _s("Impossible de se connecter Ã  l'hÃ´te distant") . "</B></TD></TR>";
         }
     }
     
@@ -923,10 +923,10 @@ function createBackupFtpCache($dir) {
 
 /**
  * createBackupSftpCache :
- * Génère le fichier de cache des backups par sftp pour Kalilab 
- * Rq : utilise le fichier /home/kalilab/sftpRecap généré à la fin du transfert sftp
+ * GÃ©nÃ¨re le fichier de cache des backups par sftp pour Kalilab 
+ * Rq : utilise le fichier /home/kalilab/sftpRecap gÃ©nÃ©rÃ© Ã  la fin du transfert sftp
  *
- * @since 22 Août 2005
+ * @since 22 AoÃ»t 2005
  *
  **/
  
@@ -944,12 +944,12 @@ function createBackupSftpCache() {
                 $current[$tmp[0][5]] = $tmp[0]; 
             }
             if ( strpos($tmp[0][5], "ackIn") ) { // "ackIn pour backIncr
-                /* on va préparer le tableau pour le trier :
-                le seul moyen pour avoir un trie simple c'est de lire le numéro d'incrément, 
-                l'insérer comme clé dans le tableau puis tier le tableau suivant les clés*/
+                /* on va prÃ©parer le tableau pour le trier :
+                le seul moyen pour avoir un trie simple c'est de lire le numÃ©ro d'incrÃ©ment, 
+                l'insÃ©rer comme clÃ© dans le tableau puis tier le tableau suivant les clÃ©s*/
                 
-                /*on récupère le numéro sachant que le nom de 
-                fichier est de la forme backIncr15-01.01.01.tgz -> très bof!!*/
+                /*on rÃ©cupÃ¨re le numÃ©ro sachant que le nom de 
+                fichier est de la forme backIncr15-01.01.01.tgz -> trÃ¨s bof!!*/
                 $a = strpos($tmp[0][5], 'r') + 1;
                 $b = strpos($tmp[0][5], '-');
                 $n = substr($tmp[0][5], $a, $b-$a);
@@ -967,7 +967,7 @@ function createBackupSftpCache() {
     
     
     else {
-        $text .= "<TR><TD colspan=5><B>" . _s("Fichier de récapitulation inaccessible.") . "</B></TD></TR>";
+        $text .= "<TR><TD colspan=5><B>" . _s("Fichier de rÃ©capitulation inaccessible.") . "</B></TD></TR>";
     }
     
     $fp = fopen('/var/www/kalilab/cache/sysInfoBackupSftp.cache','w');
@@ -980,7 +980,7 @@ function createBackupSftpCache() {
  * affichageBackupSftp :
  * retourne une chaine HTML pour l'affichage des fichiers sftp
  *
- * @param string $data  Tableau de données
+ * @param string $data  Tableau de donnÃ©es
  *
  * @return string chaine html
  *
@@ -1004,10 +1004,10 @@ function affichageBackupSftp($data) {
 
 /**
  * verificationBackup :
- * Récupère les informations sur les fichiers de backup
+ * RÃ©cupÃ¨re les informations sur les fichiers de backup
  *
- * @param string $backup1 backup de reférence(disque dur)
- * @param string $backup2 backup de reférence(amovible)
+ * @param string $backup1 backup de refÃ©rence(disque dur)
+ * @param string $backup2 backup de refÃ©rence(amovible)
  *
  * @return array Tableau des fichiers en erreur
  *
@@ -1018,11 +1018,11 @@ function affichageBackupSftp($data) {
 function verificationBackup($backup1, $backup2) {
 	/* 
 	$backup1 = sauvegarde sur disque dur
-	$backup2 = sauvegarde sur média amovible
+	$backup2 = sauvegarde sur mÃ©dia amovible
 	
 	Fonction qui compare le md5 de chaque fichier de
 	$backup1 avec $backup2.
-	Si différent, place une erreur sur le fichier
+	Si diffÃ©rent, place une erreur sur le fichier
 	Si un fichier de $backup1 n'est pas dans $backup2, erreur
 	*/
 	
@@ -1041,9 +1041,9 @@ function verificationBackup($backup1, $backup2) {
 
 /**
  * verificationBackupFtp :
- * Récupère les informations sur les fichiers de backup
+ * RÃ©cupÃ¨re les informations sur les fichiers de backup
  *
- * @param string $backup1 backup de reférence(disque dur)
+ * @param string $backup1 backup de refÃ©rence(disque dur)
  * @param string $distSize taille du fichier distant
  *
  * @return string Etat du fichier
@@ -1054,27 +1054,27 @@ function verificationBackup($backup1, $backup2) {
  
 function verificationBackupFtp($file, $distSize) {
 	
-	// si c'est backCurrent, on la "tag" à OK car elle est jour une fois par semaine seulement
-	if ( strpos($file, "Current") ) return _s("Transféré périodiquement");
-	if ( strpos($file, ".part") ) return "<FONT color=red>" . _s("Défaillant") . "</FONT>";
+	// si c'est backCurrent, on la "tag" Ã  OK car elle est jour une fois par semaine seulement
+	if ( strpos($file, "Current") ) return _s("TransfÃ©rÃ© pÃ©riodiquement");
+	if ( strpos($file, ".part") ) return "<FONT color=red>" . _s("DÃ©faillant") . "</FONT>";
 	
 	// construction du fichier local en fonction du fichier distant
 	$local = "backIncr" . substr($file, strpos($file, '-') + 1);
 	
-	// récupération de la taille du fichier local
+	// rÃ©cupÃ©ration de la taille du fichier local
 	$localLs = executeProgram('ls', '-l /home/kalilab/backup/archives/' . $local);
 	preg_match_all('/(.*)\s+(.*)\s+(.*)\s+(.*)\s+(.*)\s+/', $localLs, $tmp, PREG_SET_ORDER);
 	
-	// affichage du résultat
-	if ( !$tmp[0][2] ) return "<FONT color=green>" . _s("Dépassée") . "</FONT>";
-    if ( $tmp[0][2] !=  $distSize ) return "<FONT color=red>" . _s("Défaillant") . "</FONT>";
+	// affichage du rÃ©sultat
+	if ( !$tmp[0][2] ) return "<FONT color=green>" . _s("DÃ©passÃ©e") . "</FONT>";
+    if ( $tmp[0][2] !=  $distSize ) return "<FONT color=red>" . _s("DÃ©faillant") . "</FONT>";
     return _s("OK");
 }
 
 
 /**
  * htmlBackup :
- * Génère le code HTML pour la recap des backups
+ * GÃ©nÃ¨re le code HTML pour la recap des backups
  *
  * @param array $backup Tableau issu de type getBackupInfo
  * @param array $verif Tableau issu de verificationBackup
@@ -1103,9 +1103,9 @@ function htmlBackup($backup_type, $verif, $media) {
 		$text .= "<TD>" . afficheTailleOctet($value['size']) . "</TD>\n";
 		$text .= "<TD>";
 		
-		//test sur l'integrité
+		//test sur l'integritÃ©
 		if ( $verif && in_array($name, $verif) )
-			$text .= "<FONT color=red>" . _s("Défaillant") . "</FONT>";
+			$text .= "<FONT color=red>" . _s("DÃ©faillant") . "</FONT>";
 		else
 			$text .= "OK";
 					
@@ -1122,7 +1122,7 @@ error_reporting(5); // So that stupid warnings do not appear when we stats files
  * createBargraph :
  * Construit une barre de progression 
  *
- * @param string $percent Pourcentage à représenter
+ * @param string $percent Pourcentage Ã  reprÃ©senter
  *
  * @return string Code HTML de la barre
  * 
@@ -1226,7 +1226,7 @@ function executeProgram ($program, $args = '') {
  *
  * @param int $sec Nombre de secondes
  *
- * @return string Chaine formatée
+ * @return string Chaine formatÃ©e
  * 
  * @since 14 Mai 2005
  *
@@ -1253,12 +1253,12 @@ function executeProgram ($program, $args = '') {
 
 
 /**
- * Vérification du requiretty
+ * VÃ©rification du requiretty
  */
 function checkRequireTTY() {
 	if ( preg_match('/^[Ff]edora/', sysInfo::distro())) {
 		if (exec('cat /etc/sudoers | grep "requiretty" | grep -Ev "^#" | wc -l') > 0) {
-			klog("Attention : l'instruction 'requiretty' dans le sudoers détectée, il faut la supprimer avec visudo");
+			klog("Attention : l'instruction 'requiretty' dans le sudoers dÃ©tectÃ©e, il faut la supprimer avec visudo");
 		}
 	}
 }
