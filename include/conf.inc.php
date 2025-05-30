@@ -1,4 +1,4 @@
-<?
+<?php
  /**
   * Config de KaliRes
   *

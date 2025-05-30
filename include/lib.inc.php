@@ -1,4 +1,4 @@
-<?
+<?php
 
 include_once ($conf["baseDir"]."include/lib.patient.inc.php");
 include_once ($conf["baseDir"]."include/lib.soap.inc.php");
@@ -119,7 +119,6 @@ function afficheFoot($options=Array()) {
 			</div>
 			<div class="hide" id="nsFooterClear"><!-- for NS4's sake --></div>
 			<div id="footer" class="gap">
-				KaliRes pour KaliSil - Copyright &copy; 2012  <a href="http://www.netika.net/" title="Netika">Netika</a>, tous droits réservés
 			</div>
 		</div>
 	</div>
@@ -188,7 +187,7 @@ function afficheMessageSil($message=false) {
 			});
 		}
 	</script>
-	<?
+	<?php
 
 	echo $patientLogged->message;
 	
@@ -797,10 +796,10 @@ function entete($menu="",$menuSite=true) {
 					<div id="heading">
 						<div class="head"></div>
 						<div class="top">
-							<?include($conf['baseDir']."menuTop.php")?>
+							<?php include($conf['baseDir']."menuTop.php")?>
 						</div>
 						<div class="sub">
-							<?include($conf['baseDir']."menuTop2.php")?>
+							<?php include($conf['baseDir']."menuTop2.php")?>
 						</div>
 					</div>
 				</div>
@@ -812,7 +811,8 @@ function entete($menu="",$menuSite=true) {
 					<div id="mainInner">
 						<div class="left" style="padding-left: 1px">
 							<ul>								
-								<?
+						
+                <?php
 									$hr = false;
 									
 									if (isset($patientLogged) && $patientLogged->isAuth()) {
@@ -828,8 +828,12 @@ function entete($menu="",$menuSite=true) {
 													 </li>";
 												}
 												if($_SESSION["refAnalyse"] > 0) {
+
+
+
 													echo "<li><a href='".$conf["baseURL"]."referentiel.php'><img border=0 width=16 src=\"images/icodico.gif\"> "._s("Référentiel d'analyses")."</a></li>";
 												}
+
 											}										
 											echo "<li><a href='".$conf["baseURL"]."changePassword.php'><img border=0 src=\"images/option.gif\"> "._s("Options")."</a></li>";
 											echo "<li><a href='".$conf["baseURL"]."index.php?logout=1'><img border=0 src=\"images/logout16.gif\"> "._s("Déconnexion")."</a></li>";

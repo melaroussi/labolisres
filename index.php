@@ -1,4 +1,4 @@
-<?                                  
+<?php                                  
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");  
 header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");  
 header("Cache-Control: no-cache, must-revalidate");  
@@ -153,7 +153,7 @@ if ($sessionId!="" && ($sessSessionIdKaliResOld!=$sessionId || $sessSessionIdKal
 		if( $patientLogged->passwordExpired == 3 ){
 			
 			$patientLogged->logout();
-			?><script type="text/javascript"> document.location.href='getPassword.php?sNiveau=patient'; </script><?
+			?><script type="text/javascript"> document.location.href='getPassword.php?sNiveau=patient'; </script><?php
 			afficheFoot();
 			die();
 		
@@ -172,24 +172,24 @@ if ($sessionId!="" && ($sessSessionIdKaliResOld!=$sessionId || $sessSessionIdKal
 				."<input type=\"hidden\" name=\"sessionId\" value=\"".$sessSessionIdKaliRes."\">";
 			?>
 				<table class="corps" align=center cellpadding="2" cellspacing="3" border="0" style="border:1px solid #bbb;">
-					<?  if($patientLogged->passwordExpired == 2) { ?>
+					<?php  if($patientLogged->passwordExpired == 2) { ?>
 						<tr class=titre><td align=center colspan=2><?=_s("Votre mot de passe a expir�, veuillez saisir un nouveau mot de passe personnel");?> :</td></tr>
-					<? } else { ?>
+					<?php } else { ?>
 						<tr class=titre><td align=center colspan=2><?=_s("Veuillez saisir un mot de passe personnel pour acc�der � KaliRes");?> :</td></tr>
-					<? } ?>
+					<?php } ?>
 					<tr class=corpsFonce><td align=center colspan=2 style="font-size:11px;"><?=_s("Note : le mot de passe doit faire au minimum 5 caract�res et doit �tre diff�rent du dernier utilis�.");?></td></tr>
 					<tr><td align=right><?=_s("Identifiant");?> : </td><td><?=(($patientLogged->niveau=="patient")?($sNumSecu):($sNumAdeli));?></td></tr>
-					<? if($patientLogged->passwordToken != '') { ?>
+					<?php if($patientLogged->passwordToken != '') { ?>
 
-					<? } else { ?>
+					<?php } else { ?>
 						<tr><td align=right><?=_s("Mot de passe actuel");?> : </td><td><input type="Password" value="" name="sPasswordOld" autocomplete="off" ></td></tr>
-					<? } ?>
+					<?php } ?>
 					<tr><td colspan=2 class=titre></td></tr>
 					<tr><td align=right><?=_s("Nouveau mot de passe personnel");?> : </td><td><input type="Password" value="" name="sPassword1" autocomplete="off" ></td></tr>
 					<tr><td align=right><?=_s("Nouveau mot de passe personnel (v�rification)");?> : </td><td><input type="Password" value="" name="sPassword2" autocomplete="off" ></td></tr>
 					<tr><td align=right></td><td align="right"><input type="submit" name="send" value="<?=_s("Enregistrer");?>"></td></tr>
 				</table>
-			<?
+			<?php
 			echo "</form>";
 			die();
 			

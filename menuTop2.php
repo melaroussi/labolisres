@@ -1,4 +1,4 @@
-<?
+<?php
 global $patientLogged,$conf;
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow-sm">

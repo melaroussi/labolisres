@@ -1,6 +1,6 @@
-<?                                  
+<?php                                  
  /**                                
-  * Page d'identification et de consultation des résultats                     
+?><?php
   *                                 
   *        		                 
   * @package KaliLab                
@@ -30,7 +30,7 @@ $afficheDossierPayeMin = getSrOption('afficheDossierPayeMin');
 
 if($patientLogged->niveau=="patient" && getSrOption('affichAnt') == 0 && $patientLogged->numDemande != $sNumDossier) {
 	entete();
-	afficheMessage(_s("Erreur de sélection : impossible de trouver la demande"));
+	afficheMessage(_s("Erreur de sÃ©lection : impossible de trouver la demande"));
 	afficheFoot();
 	die();
 }
@@ -67,11 +67,11 @@ if($sNumDossier != "" && is_array($_SESSION["listeDemandesSess"]) && in_array($s
 	$iPos = array_search($sNumDossier,$_SESSION["listeDemandesSess"]);
 	$suivPrec = false;
 	if($iPos > 0 && isset($_SESSION["listeDemandesSess"][$iPos-1])) {
-		echo "<span style=\"float:left;\"><a href=\"afficheDossier.php?sNumDossier=".$_SESSION["listeDemandesSess"][$iPos-1]."&sIdDossier=".$_SESSION["listeDemandesIdSess"][$iPos-1]."\"><img border=0 src=\"images/navprevpetit.gif\"> "._s("Demande ultérieure")." (".$_SESSION["listeDemandesNomSess"][$iPos-1].")</a></span>";
+		echo "<span style=\"float:left;\"><a href=\"afficheDossier.php?sNumDossier=".$_SESSION["listeDemandesSess"][$iPos-1]."&sIdDossier=".$_SESSION["listeDemandesIdSess"][$iPos-1]."\"><img border=0 src=\"images/navprevpetit.gif\"> "._s("Demande ultÃ©rieure")." (".$_SESSION["listeDemandesNomSess"][$iPos-1].")</a></span>";
 		$suivPrec = true;
 	}
 	if($iPos < count($_SESSION["listeDemandesSess"]) && isset($_SESSION["listeDemandesSess"][$iPos+1])) {
-		echo "<span style=\"float:right;\"><a href=\"afficheDossier.php?sNumDossier=".$_SESSION["listeDemandesSess"][$iPos+1]."&sIdDossier=".$_SESSION["listeDemandesIdSess"][$iPos+1]."\">"._s("Demande antérieure")." (".$_SESSION["listeDemandesNomSess"][$iPos+1].") <img border=0 src=\"images/navnextpetit.gif\"></a></span>";
+		echo "<span style=\"float:right;\"><a href=\"afficheDossier.php?sNumDossier=".$_SESSION["listeDemandesSess"][$iPos+1]."&sIdDossier=".$_SESSION["listeDemandesIdSess"][$iPos+1]."\">"._s("Demande antÃ©rieure")." (".$_SESSION["listeDemandesNomSess"][$iPos+1].") <img border=0 src=\"images/navnextpetit.gif\"></a></span>";
 		$suivPrec = true;
 	}
 	echo "<br />";
@@ -96,19 +96,19 @@ echo '<FORM id="newPrescription" AUTOCOMPLETE=off NAME="principal" METHOD="POST"
 
 $btnAddFromVisu = "";
 if($_SESSION["accesPC"] && (!$_SESSION["accesPermalink"] || $_SESSION["accesPermalinkLevel"] == 1)){
-	$btnAddFromVisu = "<img src=\"".imagePath("icoaddpetit.gif")."\" title=\""._s("Saisir une nouvelle prescription connectée pour ce patient")."\" class=\"hand\" style=\"position:absolute; right:1px;bottom:3px;\" onClick=\"$('#newPrescription').submit();\"/></nobr>";
+	$btnAddFromVisu = "<img src=\"".imagePath("icoaddpetit.gif")."\" title=\""._s("Saisir une nouvelle prescription connectÃ©e pour ce patient")."\" class=\"hand\" style=\"position:absolute; right:1px;bottom:3px;\" onClick=\"$('#newPrescription').submit();\"/></nobr>";
 }
 echo "<table class=titreBleu cellspacing=1 cellpadding=2 align=center width=650 style=\"margin-top:10px;margin-bottom:10px;\">";
 echo "<tr class=corps height=\"20px\">"
-		."<td width=\"14%\" class=corpsFonce>"._s("N° Demande")." :</td>"
+		."<td width=\"14%\" class=corpsFonce>"._s("NÂ° Demande")." :</td>"
 		."<td width=\"34%\">".$dataPatient['numDemande']."</td>"
 		."<td width=\"18%\" class=corpsFonce>"._s("Date saisie")." :</td>"
 		."<td width=\"34%\">".afficheDate($dataPatient['saisieDate'])." ".$dataPatient['saisieHeure'].(($dataPatient['saisieDate']!=$dataPatient['demandeDate'])?(" (".afficheDate($dataPatient['demandeDate']).")"):(""))."</td>"
 	."</tr>"
 	."<tr class=corps height=\"20px\">"
-		."<td class=corpsFonce>"._s("N° Admission")." :</td>"
+		."<td class=corpsFonce>"._s("NÂ° Admission")." :</td>"
 		."<td>".$dataPatient['numDemandeExterne'].(($dataPatient['numPermanentExterne']!="")?(" (IPP ".$dataPatient['numPermanentExterne'].")"):(""))."</td>"
-		."<td class=corpsFonce>"._s("Date prélèvement")." :</td>"
+		."<td class=corpsFonce>"._s("Date prÃ©lÃ¨vement")." :</td>"
 		."<td>".(($dataPatient['preleveDate']!="0000-00-00")?(afficheDate($dataPatient['preleveDate'])." ".$dataPatient['preleveHeure']):("")).(($dataPatient['saisieDate']!=$dataPatient['demandeDate'])?(" (".afficheDate($dataPatient['demandeDate']).")"):(""))."</td>"
 	."</tr>"
 	."<tr class=corps height=\"20px\">"
@@ -118,7 +118,7 @@ echo "<tr class=corps height=\"20px\">"
 		."<td>".afficheDate($dataPatient['dateNaissance'])."</td>"
 	."</tr>"
 	."<tr class=corps height=\"20px\">"
-		."<td class=corpsFonce>"._s("Médecin")." :</td>"
+		."<td class=corpsFonce>"._s("MÃ©decin")." :</td>"
 		."<td>".$dataPatient['nomMedecin']."<span style=\"font-size:10px;\"><br />".$dataPatient['medecinCoordonnee']."</span></td>"
 		."<td class=corpsFonce>"._s("Correspondant")." :</td>"
 		."<td>".$dataPatient['nomCorrespondant']."<span style=\"font-size:10px;\"><br />".$dataPatient['correspCoordonnee']."</span></td>"
@@ -129,26 +129,26 @@ echo "<br />";
 if($patientLogged->niveau == "patient" && $dataPatient['restePatient'] > 0) {
 	$strPaiement = getStrPaiement($dataPatient['id'],$dataPatient['numDemande'],$dataPatient['restePatient'], $dataPatient["idSite"]);
 	if($strPaiement != "") $strPaiement = "<br />".$strPaiement;
-	echo "<center><div style=\"color:#222;border:1px solid #aaa;padding:4px;width:450px;background-color:#fff;\">"._s("Cette demande n'a pas encore été réglée")." (".$dataPatient['restePatient']." ".getMonnaie("html").")".$strPaiement."</div><br /><br /></center>";
+	echo "<center><div style=\"color:#222;border:1px solid #aaa;padding:4px;width:450px;background-color:#fff;\">"._s("Cette demande n'a pas encore Ã©tÃ© rÃ©glÃ©e")." (".$dataPatient['restePatient']." ".getMonnaie("html").")".$strPaiement."</div><br /><br /></center>";
 	if($afficheDossierPaye > 0 && $dataPatient['restePatient'] > $afficheDossierPayeMin) {
-		echo "<center><b>"._s("Les résultats seront visibles après règlement de la demande auprès du laboratoire")."</b></center>";
+		echo "<center><b>"._s("Les rÃ©sultats seront visibles aprÃ¨s rÃ¨glement de la demande auprÃ¨s du laboratoire")."</b></center>";
 		afficheFoot();
 		die();
 	}
 } elseif($patientLogged->niveau == "patient" && $dataPatient['montantPatient'] > 0 && paiementAllowed($dataPatient["idSite"])) {
-	/* SOAP: Récupération de la quittance */
+	/* SOAP: RÃ©cupÃ©ration de la quittance */
 	$scd = new SoapClientDemande();
 	$nomFichier = $scd->getFichierQuittance($dataPatient['id']);
 	if ($nomFichier != false) {
 		$nomPdfDemande = str_replace(Array(" ", "-", "/"), Array("_"), $dataPatient['numDemande']) . "_Quittance.pdf";
-		echo "<center><div style=\"color:#222;border:1px solid #aaa;padding:4px;width:450px;background-color:#fff;\"><span class=\"hand\" onClick=\"makeRemote('quittance','pjGet.php?src=quittance&file=" . basename($nomFichier) . "&nom=" . $nomPdfDemande . "',800,600);\">" . _s("Cette demande a été réglée, cliquez-ici pour récupérer la quittance") . "<img src=\"" . imagePath("icopdf2.gif") . "\" /><br /></span></div><br /><br /></center>";
+		echo "<center><div style=\"color:#222;border:1px solid #aaa;padding:4px;width:450px;background-color:#fff;\"><span class=\"hand\" onClick=\"makeRemote('quittance','pjGet.php?src=quittance&file=" . basename($nomFichier) . "&nom=" . $nomPdfDemande . "',800,600);\">" . _s("Cette demande a Ã©tÃ© rÃ©glÃ©e, cliquez-ici pour rÃ©cupÃ©rer la quittance") . "<img src=\"" . imagePath("icopdf2.gif") . "\" /><br /></span></div><br /><br /></center>";
 	} else {
 		echo "<center><div style=\"color:#222;border:1px solid #aaa;padding:4px;width:450px;background-color:#fff;\">"._s("Quittance non disponible pour le moment")."</div><br /><br /></center>";
 	}
 }
 
 if(is_array($dataPatient['dataNC']) && count($dataPatient['dataNC']) > 0) {
-	echo "<center><div style=\"color:#222;border:1px solid #aaa;padding:4px;width:650px;background-color:#fff;text-align:left;\"><u>"._s("Dysfonctionnement identifié sur cette demande")."</u><br /> &middot; ";
+	echo "<center><div style=\"color:#222;border:1px solid #aaa;padding:4px;width:650px;background-color:#fff;text-align:left;\"><u>"._s("Dysfonctionnement identifiÃ© sur cette demande")."</u><br /> &middot; ";
 	echo implode("<br /> &middot; ",$dataPatient['dataNC']);
 	echo "</div><br /><br /></center>";
 }
@@ -161,7 +161,7 @@ if ($dataPatient["status"] != 'valide' && ($typeDestinataire == "preleveur"
 											|| ($typeDestinataire == "patient" && $affichEncours == 0)
 											|| (in_array($typeDestinataire,Array("medecin","correspondant")) && $dataPatient["dataInter"]["kaliresNonValide"] == 2))) {
 
-	afficheMessage(_s("Demande non validée, veuillez vous reconnecter ultérieurement"));
+	afficheMessage(_s("Demande non validÃ©e, veuillez vous reconnecter ultÃ©rieurement"));
 
 } else if(($dataPatient["status"] == "valide" && ($typeDestinataire == "patient" || $typeDestinataire == "preleveur")) || ($typeDestinataire == "patient" && $affichEncours == 1) || $typeDestinataire == "medecin" || $typeDestinataire == "correspondant") {
 
@@ -195,12 +195,12 @@ if ($dataPatient["status"] != 'valide' && ($typeDestinataire == "preleveur"
 	echo "<TABLE cellspacing=1 cellpadding=2 border=0 width=98% class=titre align=center>"
 		."<TR class=titreBleu>"
 			."<TD><NOBR> "._s("Nom")." </NOBR></TD>"
-			."<TD><NOBR>&nbsp;"._s("Résultat")."&nbsp;</NOBR></TD>"
-			."<TD><NOBR>&nbsp;"._s("Unité")."&nbsp;</NOBR></TD>"
+			."<TD><NOBR>&nbsp;"._s("RÃ©sultat")."&nbsp;</NOBR></TD>"
+			."<TD><NOBR>&nbsp;"._s("UnitÃ©")."&nbsp;</NOBR></TD>"
 			."<TD align=center><NOBR>&nbsp;"._s("Bornes")."&nbsp;</NOBR></TD>"
-			."<TD title=\"Indicateur d'anormalité\" alt=\"Indicateur d'anormalité\"><NOBR> "._s("Ind")." </NOBR></TD>"
+			."<TD title=\"Indicateur d'anormalitÃ©\" alt=\"Indicateur d'anormalitÃ©\"><NOBR> "._s("Ind")." </NOBR></TD>"
 			."<TD title=\"Validation\" alt=\"Validation\"><NOBR> "._s("Val")." </NOBR></TD>"
-			.(($anterioriteTableau)?($trAnterio):("<TD><NOBR> "._s("Antériorité")." </NOBR></TD>"))
+			.(($anterioriteTableau)?($trAnterio):("<TD><NOBR> "._s("AntÃ©rioritÃ©")." </NOBR></TD>"))
 		."</TR>";
 	$tmp2="";
 
@@ -288,7 +288,7 @@ if ($dataPatient["status"] != 'valide' && ($typeDestinataire == "preleveur"
 			 if ($dataAnalyse["SremplacementCorrespondantAnalyse"] !="") $remplacementCorrespondantAnalyse=$dataAnalyse["SremplacementCorrespondantAnalyse"];
 		}
 		
-		//Si le resultat n'est pas validé, on saute pour le patient et on remplace pour le médecin
+		//Si le resultat n'est pas validÃ©, on saute pour le patient et on remplace pour le mÃ©decin
 		if ($typeDestinataire=="patient" && $dataAnalyse["valideBioPar"]==0) {
 			$remplacementPatient="<I><B><SPAN style='color:orange'>"._s("En cours")."</SPAN><B></I>";
 		}else{
@@ -345,7 +345,7 @@ if ($dataPatient["status"] != 'valide' && ($typeDestinataire == "preleveur"
 		else $class="corps";
 		if ($dataAnalyse["borneBiologique"]!=0 && $typeDestinataire!="patient") $class="rouge";
 		
-		// Antériorité
+		// AntÃ©rioritÃ©
 		if($anterioriteTableau) {
 			$anterio = "";
 			$anterioConv = "";
@@ -398,12 +398,12 @@ if ($dataPatient["status"] != 'valide' && ($typeDestinataire == "preleveur"
 			$timestampValCur = strtotime($dataAnalyse["valideBioDate"]." ".$dataAnalyse["valideBioHeure"]);
 			if($timestampValCur > $dernierValideurBioTime) {
 				$dernierValideurBioTime = $timestampValCur;
-				$dernierValideurBioStr = sprintf(_s("par %s le %s à %s"),$dataAnalyse["nomBiologiste"]." ".$dataAnalyse["prenomBiologiste"],afficheDate($dataAnalyse["valideBioDate"]),substr($dataAnalyse["valideBioHeure"],0,5));
+				$dernierValideurBioStr = sprintf(_s("par %s le %s Ã  %s"),$dataAnalyse["nomBiologiste"]." ".$dataAnalyse["prenomBiologiste"],afficheDate($dataAnalyse["valideBioDate"]),substr($dataAnalyse["valideBioHeure"],0,5));
 			}
 		} else {
 			$bonusStyleResu = "font-style:italic;";
 			$strValPar = "<img src=\"images/attentionPetit.gif\">";
-			$strValParTitle = _s("Résultat non validé biologiquement");
+			$strValParTitle = _s("RÃ©sultat non validÃ© biologiquement");
 		}
 		
 		$icoCommentaire = "";
@@ -440,7 +440,7 @@ if ($dataPatient["status"] != 'valide' && ($typeDestinataire == "preleveur"
 			$asterisk = "<span style=\"float:right;font-size:9px;\">(".(array_search($dataAnalyse["correspNom"],$tabExecutant)+1).")</span>";
 		}
 		
-		//Affichage d'une ligne de résultat
+		//Affichage d'une ligne de rÃ©sultat
 		if($dataAnalyse["resultatType"] == "texteCodifie") {
 			echo "<TR class=$class>"
 					."<TD class=\"descrGrand ".$classListe."\" align=left><NOBR>".$asterisk."&nbsp;".changeTxtAna($monAnalyse)." </NOBR></TD>"
@@ -464,11 +464,11 @@ if ($dataPatient["status"] != 'valide' && ($typeDestinataire == "preleveur"
 	
 	echo "</TABLE>";
 
-	echo "<br /><SPAN class=descr><B>"._s("Indicateur Anormalité")." :</B><img src=\"images/borneDepasseBas.gif\"> : "._s("inférieur à la normale")." ; <img src=\"images/borneNormale.gif\"> : "._s("normal")." ; <img src=\"images/borneDepasseHaut.gif\"> : "._s("supérieur à la normale")."</SPAN>";
-	echo "<br /><br /><SPAN class=descr><B> * </B>: "._s('Résultat validé techniquement uniquement')."</SPAN>";
+	echo "<br /><SPAN class=descr><B>"._s("Indicateur AnormalitÃ©")." :</B><img src=\"images/borneDepasseBas.gif\"> : "._s("infÃ©rieur Ã  la normale")." ; <img src=\"images/borneNormale.gif\"> : "._s("normal")." ; <img src=\"images/borneDepasseHaut.gif\"> : "._s("supÃ©rieur Ã  la normale")."</SPAN>";
+	echo "<br /><br /><SPAN class=descr><B> * </B>: "._s('RÃ©sultat validÃ© techniquement uniquement')."</SPAN>";
 	
 	if(count($tabExecutant) > 0) {
-		echo "<br /><span class=descr><br /><b>"._s("Laboratoire(s) exécutant(s)")." :</b> ";
+		echo "<br /><span class=descr><br /><b>"._s("Laboratoire(s) exÃ©cutant(s)")." :</b> ";
 		foreach($tabExecutant as $iExec => $nomExec) {
 			echo "<span style=\"font-size:9px;\"> (".($iExec+1).") ".$nomExec."&nbsp;&nbsp;&nbsp;";
 		}
@@ -478,12 +478,12 @@ if ($dataPatient["status"] != 'valide' && ($typeDestinataire == "preleveur"
 	
 	$strGarde = "";
 	if($dataPatient["gardeBio"] != "") {
-		$strGarde = " ".sprintf(_s("sous la responsabilité de %s"),$dataPatient["gardeBio"]);
+		$strGarde = " ".sprintf(_s("sous la responsabilitÃ© de %s"),$dataPatient["gardeBio"]);
 	}
 	$head = "<CENTER>"
 				."<span class=corps style=\"font-size:14px;\"> "._s("Etat de la demande")." : "
-					.(($dataPatient["status"]=="valide" && $dataPatient["garde"]>0)?("<span style=\"color:#009933;font-style:italic;\">"._s("Libérée en période de garde")."</span>"):(getDemandeStatusStr($dataPatient["status"])))
-					.(($patientLogged->niveau=="patient" && $dataPatient["status"]!="valide")?"<br /><span style=\"font-size:11px;\">"._s("Toutes les analyses ne sont pas terminées, le compte rendu pdf sera disponible après la validation biologique complète.")."</span>":"")
+					.(($dataPatient["status"]=="valide" && $dataPatient["garde"]>0)?("<span style=\"color:#009933;font-style:italic;\">"._s("LibÃ©rÃ©e en pÃ©riode de garde")."</span>"):(getDemandeStatusStr($dataPatient["status"])))
+					.(($patientLogged->niveau=="patient" && $dataPatient["status"]!="valide")?"<br /><span style=\"font-size:11px;\">"._s("Toutes les analyses ne sont pas terminÃ©es, le compte rendu pdf sera disponible aprÃ¨s la validation biologique complÃ¨te.")."</span>":"")
 					.(($dernierValideurBioStr!="" && ($dataPatient['status']=="valide" || $dataPatient['status']=="valideValab"))?("<br /><span style=\"font-size:10px;\">".$dernierValideurBioStr.$strGarde."</span>"):(""))
 				."</span>"
 			."</CENTER>"
@@ -496,7 +496,7 @@ if ($dataPatient["status"] != 'valide' && ($typeDestinataire == "preleveur"
 	
 	/*********************************************** ONGLET IMPRESSION *************************************************/
 	
-	/* SOAP: Récupération du fichier de CR */
+	/* SOAP: RÃ©cupÃ©ration du fichier de CR */
 
 	if(in_array($typeDestinataire,Array("medecin","correspondant")) && in_array($dataPatient["status"], Array('enCours','complet')) && in_array($dataPatient["dataInter"]["kaliresNonValide"],Array(0,1)) && getSrOption("kaliResGeneratePartiel")) {
 		if($_GET['showCRPartiel'] == '1') {
@@ -526,13 +526,13 @@ if ($dataPatient["status"] != 'valide' && ($typeDestinataire == "preleveur"
 			$tmp2 .= "<br /><center>".$selectCr;
 
 			if($valideDateHeureDemande != "") {
-				$tmp2 .= "<br /><br /><span style=\"font-size:11px;\"><b>".sprintf(_s("Demande validée biologiquement le %s à %s"),afficheDate($valideDateHeureDemande),substr($valideDateHeureDemande,-8))."</b></span></center><br />";
+				$tmp2 .= "<br /><br /><span style=\"font-size:11px;\"><b>".sprintf(_s("Demande validÃ©e biologiquement le %s Ã  %s"),afficheDate($valideDateHeureDemande),substr($valideDateHeureDemande,-8))."</b></span></center><br />";
 			}
 
 			if($crSelected > 0) {
 				$tmp2.="<IFRAME width=95% height=700 id='frameCr' src='showFileCR.php/".$dataPatient['tabImpr'][$crSelected]['nomFichier']."?id=".$dataPatient['id']."&numDemande=".$dataPatient['numDemande']."&crSelected=".$crSelected."'></IFRAME>";
 			} else {
-				$tmp2.="<br /><br /><span class=corpsFonce><b>"._s("Veuillez sélectionner un compte-rendu à afficher")."</b></span><br /><br />";
+				$tmp2.="<br /><br /><span class=corpsFonce><b>"._s("Veuillez sÃ©lectionner un compte-rendu Ã  afficher")."</b></span><br /><br />";
 			}
 
 		} else {
@@ -555,7 +555,7 @@ if ($dataPatient["status"] != 'valide' && ($typeDestinataire == "preleveur"
 	
 	
 	$tmp3="<table align=center cellpadding=1 cellspacing=1 border=0 width=98% style=\"border:1px solid #ccc;\">";
-	$tmp3.="<tr class=titreBleu><td colspan=3>"._s("Numéro de demande")."</td><td>"._s("Date de la demande")."</td><td>Etat</td></tr>";	
+	$tmp3.="<tr class=titreBleu><td colspan=3>"._s("NumÃ©ro de demande")."</td><td>"._s("Date de la demande")."</td><td>Etat</td></tr>";	
 	if (is_array($dataAnteriorite)) foreach($dataAnteriorite as $key => $dataAnt) {
 		if ($typeDestinataire!="patient") {
 			$str=$dataAnt["strPatient"];
@@ -585,10 +585,10 @@ if ($dataPatient["status"] != 'valide' && ($typeDestinataire == "preleveur"
 	
 	$ongletCr = ($typeDestinataire == "patient" && getSrOption("patientOngletCr") || $_GET['showCRPartiel'] == '1') && $nomFichier !== false;
 	
-	$tab[] = Array('selected'=>(!$ongletCr),'name'=>"<NOBR>"._s("Résultats")."</NOBR>",'data'=>$tmp);
+<?php
 	$tab[] = Array('selected'=>($ongletCr),'name'=>"<NOBR>"._s("Compte rendu")."</NOBR>",'data'=>$tmp2);
 	if($typeDestinataire == "medecin" || $typeDestinataire == "correspondant" || $typeDestinataire == "preleveur" || ($typeDestinataire=="patient" && $affichAnt)) {
-		$tab[] = Array('selected'=>false,'name'=>"<NOBR>"._s("Résultats antérieurs")."</NOBR>",'data'=>$tmp3);
+		$tab[] = Array('selected'=>false,'name'=>"<NOBR>"._s("RÃ©sultats antÃ©rieurs")."</NOBR>",'data'=>$tmp3);
 	}
 	echo "<center>".navGetTab('monTableau',$tab,"width=95%")."</center>";
 }

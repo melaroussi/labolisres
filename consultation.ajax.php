@@ -1,14 +1,14 @@
-<?                                  
+<?php                                  
 
 include_once ("include/conf.inc.php");
 include_once ("include/lib.inc.php");
 
 filtrageAcces("patient","index.php","index.php");
 
-// Date du passé
+// Date du passÃ©
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 
-// toujours modifié
+// toujours modifiÃ©
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 
 // HTTP/1.1

@@ -1,4 +1,4 @@
-<?
+<?php
 	global $conf, $patientLogged;
 ?>
 <div class="sidebar bg-white shadow-sm" id="leftMenu">
