@@ -171,26 +171,13 @@ a:hover {
     border-color: var(--secondary-color);
 }
 
-/* Tables */
-.table {
-    width: 100%;
-    margin-bottom: 1rem;
-    background-color: transparent;
-    border-collapse: collapse;
-}
-
-.table th,
-.table td {
-    padding: 0.75rem;
-    vertical-align: top;
-    border-top: 1px solid var(--border-color);
-}
-
-.table thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid var(--border-color);
-    background-color: #f8f9fa;
-}
+/* Modern Layout Helpers */
+/*
+ * Old table styling rules have been removed in favour of the
+ * Bootstrap table component which is already included in the page.
+ * Any element that previously relied on the custom `.table` classes
+ * should now simply use Bootstrap's `.table` utilities.
+ */
 
 /* Cards */
 .card {
@@ -257,6 +244,20 @@ a:hover {
     .col {
         width: 100%;
         margin-bottom: 1rem;
+    }
+
+    /* Stack legacy layout blocks */
+    #mainOuter {
+        flex-direction: column;
+        border-left: none;
+        border-right: none;
+    }
+    #mainOuter .left,
+    #mainOuter .right,
+    #mainOuter .content {
+        flex: 0 0 auto;
+        width: 100%;
+        margin: 0;
     }
 }
 
@@ -356,7 +357,6 @@ img.product,
 
 div.wide3 {
 	width: 33%;
-	float: left;
 	text-align: center;
 }
 
@@ -396,7 +396,6 @@ h1 {
 }
 
 h1 span {
-	float: right;
 	color: #69839B;
 }
 
@@ -425,7 +424,6 @@ h1 span {
 #header #logo {
 	width: 16em;
 	background: #FFF;
-	float: left;
 	margin: 0 2px;
 	height: 146px;
 	position: absolute;
@@ -434,7 +432,6 @@ h1 span {
 
 #header #logo2 {
 	width: 16em;
-	float: left;
 	margin: 0 2px;
 	height: 146px;
 	position: absolute;
@@ -459,7 +456,6 @@ h1 span {
 #heading .top{
 	color: #FFF;
 	margin: 3px 10px 0 0;
-	float: right;
 	width: 570px;
 	text-align: right;
 	height: 22px;
@@ -467,7 +463,6 @@ h1 span {
 #heading .sub {
 	color: #FFF;
 	margin: 12px 10px 0 0;
-	float: right;
 	width: 900px;
 	text-align: right;
 	height: 22px;
@@ -521,7 +516,6 @@ div.subBarInner div.right,
 div.subTitleInner div.content,
 div.subTitleInner div.right {
 	/* For Sub elements of #mainOuter AND div.subBarInner */
-	float: left;
 	position: relative;
 	z-index: 10;
 	overflow: visible;	/* fix for IE italics bug */
@@ -539,7 +533,6 @@ div.subTitleOuter {
 
 div.subBarInner div.right,
 div.subTitleInner div.right {
-	float: right;
 	width: 20em;
 	margin: 0 -20em 0 1px;
 }
@@ -553,6 +546,8 @@ div.subTitleInner div.content {
 /* --------------------- The Main Bar Piece -------------------- */
 
 #mainOuter {
+        display: flex;
+        flex-wrap: nowrap;
 	z-index: 1;
 	border-left: 16em #E6EEF0 solid;
 	border-right: 8px #0B70CE solid;
@@ -564,20 +559,20 @@ div.subTitleInner div.content {
 }
 
 #mainOuter .content {
-	margin: 0 0px;	/* Ensure floating */
-	width: 100%;
+        flex: 1 1 auto;
+        margin: 0;
+        width: auto;
 }
 
 #mainOuter .right {
-	/* Not used for now */
-	float: right; 			/* Possiblity for NN4 layout */
-	width: 15em;
-	margin: 0 -15em 0 1px;	/* Column position */
+        /* Not used for now */
+        flex: 0 0 15em;
+        margin: 0;
 }
 
 #mainOuter .left {
-	width: 16em;
-	margin: 0 1px 0 -16em;	/* Column position */
+        flex: 0 0 16em;
+        margin: 0;
 }
 
 /* -----------------------------------------------------------
@@ -608,7 +603,7 @@ html>body .mozclear {
 }
 
 * html #mainOuter {
-	border-right: 4px #0B70CE solid;
+        border-right: 4px #0B70CE solid;
 }
 
 .leftInside,

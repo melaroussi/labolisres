@@ -33,7 +33,9 @@ putenv("LANGUAGE=".$conf['userLang']);
 
 function afficheHead($titre,$script,$javascript=false,$displayAllScript=false){
 	global $conf,$patientLogged;
-	$res= "<html><head><title>".$titre."</title>";
+	$res= "<!DOCTYPE html>\n<html lang="fr"><head><title>".$titre."</title>";
+        $res.= "\n\t<meta charset=\"UTF-8\">";
+        $res.= "\n\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">";
 	$res.= "\n\t<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"".$conf["baseURL"]."favico.kalires.ico\" />";
 	$res.= "\n\t<link rel=\"icon\" type=\"image/gif\" href=\"".$conf["baseURL"]."images/kalires.gif\" />";
 	$res.= "\n\t<link rel=\"stylesheet\" href=\"".$conf["baseURL"]."include/kalires2.css\">";
@@ -117,7 +119,6 @@ function afficheFoot($options=Array()) {
 			</div>
 			<div class="hide" id="nsFooterClear"><!-- for NS4's sake --></div>
 			<div id="footer" class="gap">
-	<?php
 			</div>
 		</div>
 	</div>
@@ -810,7 +811,8 @@ function entete($menu="",$menuSite=true) {
 					<div id="mainInner">
 						<div class="left" style="padding-left: 1px">
 							<ul>								
-								<?php
+						
+                <?php
 									$hr = false;
 									
 									if (isset($patientLogged) && $patientLogged->isAuth()) {
@@ -826,8 +828,12 @@ function entete($menu="",$menuSite=true) {
 													 </li>";
 												}
 												if($_SESSION["refAnalyse"] > 0) {
-								<?php
-<?php
+
+
+
+													echo "<li><a href='".$conf["baseURL"]."referentiel.php'><img border=0 width=16 src=\"images/icodico.gif\"> "._s("Référentiel d'analyses")."</a></li>";
+												}
+
 											}										
 											echo "<li><a href='".$conf["baseURL"]."changePassword.php'><img border=0 src=\"images/option.gif\"> "._s("Options")."</a></li>";
 											echo "<li><a href='".$conf["baseURL"]."index.php?logout=1'><img border=0 src=\"images/logout16.gif\"> "._s("Déconnexion")."</a></li>";
